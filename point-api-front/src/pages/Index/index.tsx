@@ -55,7 +55,7 @@ const IndexPage: React.FC = () => {
             width: '40vw',
             minWidth: 320,
           }}
-          placeholder="搜索代码生成器"
+          placeholder="搜索接口"
           allowClear
           enterButton="搜索"
           size="large"
@@ -96,16 +96,14 @@ const IndexPage: React.FC = () => {
         labelAlign="left"
         defaultCollapsed={false}
         style={{padding: '16px 0'}}
-        onFinish={async (values: API.InterfaceInfo) => {
+        onFinish={async (values: API.InterfaceInfoQueryRequest) => {
           setSearchParams({
             ...DEFAULT_PAGE_PARAMS,
             // @ts-ignore
             ...values,
-            description: searchParams.description,
           });
         }}
       >
-        <ProFormSelect label="标签" name="tags" mode="tags"/>
         <ProFormText label="名称" name="name"/>
         <ProFormText label="描述" name="description"/>
       </QueryFilter>

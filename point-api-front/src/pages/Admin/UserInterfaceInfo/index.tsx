@@ -1,9 +1,9 @@
-import CreateModal from '@/pages/Admin/InterfaceInfo/components/CreateModal';
-import UpdateModal from '@/pages/Admin/InterfaceInfo/components/UpdateModal';
+import CreateModal from '@/pages/Admin/UserInterfaceInfo/components/CreateModal';
+import UpdateModal from '@/pages/Admin/UserInterfaceInfo/components/UpdateModal';
 import {
-  deleteInterfaceInfoUsingPost,
-  listInterfaceInfoByPageUsingPost
-} from '@/services/backend/interfaceInfoController';
+  deleteUserInterfaceInfoUsingPost,
+  listUserInterfaceInfoByPageUsingPost
+} from '@/services/backend/userInterfaceInfoController';
 import {PlusOutlined} from '@ant-design/icons';
 import type {ActionType, ProColumns} from '@ant-design/pro-components';
 import {PageContainer, ProTable} from '@ant-design/pro-components';
@@ -16,25 +16,25 @@ import React, {useRef, useState} from 'react';
  *
  * @constructor
  */
-const InterfaceInfoAdminPage: React.FC = () => {
+const UserInterfaceInfoAdminPage: React.FC = () => {
   // 是否显示新建窗口
   const [createModalVisible, setCreateModalVisible] = useState<boolean>(false);
   // 是否显示更新窗口
   const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
   const actionRef = useRef<ActionType>();
   // 当前用户点击的数据
-  const [currentRow, setCurrentRow] = useState<API.InterfaceInfoQueryRequest>();
+  const [currentRow, setCurrentRow] = useState<API.UserInterfaceInfoQueryRequest>();
 
   /**
    * 删除节点
    *
    * @param row
    */
-  const handleDelete = async (row: API.InterfaceInfo) => {
+  const handleDelete = async (row: API.UserInterfaceInfo) => {
     const hide = message.loading('正在删除');
     if (!row) return true;
     try {
-      await deleteInterfaceInfoUsingPost({
+      await deleteUserInterfaceInfoUsingPost({
         id: row.id as any,
       });
       hide();
@@ -51,7 +51,7 @@ const InterfaceInfoAdminPage: React.FC = () => {
   /**
    * 表格列配置
    */
-  const columns: ProColumns<API.InterfaceInfo>[] = [
+  const columns: ProColumns<API.UserInterfaceInfo>[] = [
     {
       title: 'id',
       dataIndex: 'id',
@@ -59,42 +59,23 @@ const InterfaceInfoAdminPage: React.FC = () => {
       hideInForm: true,
     },
     {
-      title: '名称',
-      dataIndex: 'name',
+      title: '创建人',
+      dataIndex: 'userId',
       valueType: 'text',
     },
     {
-      title: '描述',
-      dataIndex: 'description',
+      title: '接口',
+      dataIndex: 'interfaceInfoId',
       valueType: 'text',
     },
     {
-      title: '图片',
-      dataIndex: 'picture',
-      valueType: 'image',
-      fieldProps: {
-        width: 64,
-      },
-      hideInSearch: true,
-    },
-    {
-      title: '接口地址',
-      dataIndex: 'url',
+      title: '总调用次数',
+      dataIndex: 'totalNum',
       valueType: 'text',
     },
     {
-      title: '请求参数',
-      dataIndex: 'requestParams',
-      valueType: 'text',
-    },
-    {
-      title: '请求头',
-      dataIndex: 'requestHeader',
-      valueType: 'text',
-    },
-    {
-      title: '响应头',
-      dataIndex: 'responseHeader',
+      title: '剩余调用次数',
+      dataIndex: 'leftNum',
       valueType: 'text',
     },
     {
@@ -102,30 +83,12 @@ const InterfaceInfoAdminPage: React.FC = () => {
       dataIndex: 'status',
       valueEnum: {
         0: {
-          text: '关闭',
+          text: '正常',
         },
         1: {
-          text: '开启',
+          text: '禁用',
         },
       },
-    },
-    {
-      title: '请求类型',
-      dataIndex: 'method',
-      valueEnum: {
-        post: {
-          text: 'post',
-        },
-        get: {
-          text: 'get',
-        },
-      },
-    },
-    {
-      title: '创建人',
-      dataIndex: 'userId',
-      valueType: 'text',
-      hideInForm: true,
     },
     {
       title: '创建时间',
@@ -166,7 +129,7 @@ const InterfaceInfoAdminPage: React.FC = () => {
   ];
   return (
     <PageContainer>
-      <ProTable<API.InterfaceInfo>
+      <ProTable<API.UserInterfaceInfo>
         headerTitle={'查询表格'}
         actionRef={actionRef}
         rowKey="key"
@@ -188,12 +151,12 @@ const InterfaceInfoAdminPage: React.FC = () => {
           const sortField = Object.keys(sort)?.[0];
           const sortOrder = sort?.[sortField] ?? undefined;
 
-          const {data, code} = await listInterfaceInfoByPageUsingPost({
+          const {data, code} = await listUserInterfaceInfoByPageUsingPost({
             ...params,
             sortField,
             sortOrder,
             ...filter,
-          } as API.InterfaceInfoQueryRequest);
+          } as API.UserInterfaceInfoQueryRequest);
 
           return {
             success: code === 0,
@@ -230,4 +193,4 @@ const InterfaceInfoAdminPage: React.FC = () => {
     </PageContainer>
   );
 };
-export default InterfaceInfoAdminPage;
+export default UserInterfaceInfoAdminPage;

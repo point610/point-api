@@ -7,14 +7,15 @@ import com.point.springbootinit.common.BaseResponse;
 import com.point.springbootinit.common.DeleteRequest;
 import com.point.springbootinit.common.ErrorCode;
 import com.point.springbootinit.common.ResultUtils;
-import com.point.springbootinit.constant.CommonConstant;
 import com.point.springbootinit.constant.UserConstant;
 import com.point.springbootinit.exception.BusinessException;
 import com.point.springbootinit.model.dto.userinterfaceinfo.UserInterfaceInfoAddRequest;
 import com.point.springbootinit.model.dto.userinterfaceinfo.UserInterfaceInfoQueryRequest;
 import com.point.springbootinit.model.dto.userinterfaceinfo.UserInterfaceInfoUpdateRequest;
+import com.point.springbootinit.model.entity.InterfaceInfo;
 import com.point.springbootinit.model.entity.User;
 import com.point.springbootinit.model.entity.UserInterfaceInfo;
+import com.point.springbootinit.model.enums.PageEnum;
 import com.point.springbootinit.service.UserInterfaceInfoService;
 import com.point.springbootinit.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -69,7 +70,6 @@ public class UserInterfaceInfoController {
         return ResultUtils.success(newUserInterfaceInfoId);
     }
 
-    // [加入编程导航](https://t.zsxq.com/0emozsIJh) 深耕编程提升【两年半】、国内净值【最高】的编程社群、用心服务【20000+】求学者、帮你自学编程【不走弯路】
 
     /**
      * 删除
@@ -155,8 +155,8 @@ public class UserInterfaceInfoController {
      * @return
      */
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
-    @GetMapping("/list")
-    public BaseResponse<List<UserInterfaceInfo>> listUserInterfaceInfo(UserInterfaceInfoQueryRequest userInterfaceInfoQueryRequest) {
+    @PostMapping("/list")
+    public BaseResponse<List<UserInterfaceInfo>> listUserInterfaceInfo(@RequestBody UserInterfaceInfoQueryRequest userInterfaceInfoQueryRequest) {
         UserInterfaceInfo userInterfaceInfoQuery = new UserInterfaceInfo();
         if (userInterfaceInfoQueryRequest != null) {
             BeanUtils.copyProperties(userInterfaceInfoQueryRequest, userInterfaceInfoQuery);
@@ -174,26 +174,21 @@ public class UserInterfaceInfoController {
      * @return
      */
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
-    @GetMapping("/list/page")
-    public BaseResponse<Page<UserInterfaceInfo>> listUserInterfaceInfoByPage(UserInterfaceInfoQueryRequest userInterfaceInfoQueryRequest, HttpServletRequest request) {
+    @PostMapping("/list/page")
+    public BaseResponse<Page<UserInterfaceInfo>> listUserInterfaceInfoByPage(@RequestBody UserInterfaceInfoQueryRequest userInterfaceInfoQueryRequest, HttpServletRequest request) {
         if (userInterfaceInfoQueryRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        UserInterfaceInfo userInterfaceInfoQuery = new UserInterfaceInfo();
-        BeanUtils.copyProperties(userInterfaceInfoQueryRequest, userInterfaceInfoQuery);
         long current = userInterfaceInfoQueryRequest.getCurrent();
         long size = userInterfaceInfoQueryRequest.getPageSize();
-        String sortField = userInterfaceInfoQueryRequest.getSortField();
-        String sortOrder = userInterfaceInfoQueryRequest.getSortOrder();
         // 限制爬虫
-        if (size > 50) {
+        if (size > PageEnum.OnceLimit.getValue()) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        QueryWrapper<UserInterfaceInfo> queryWrapper = new QueryWrapper<>(userInterfaceInfoQuery);
-        queryWrapper.orderBy(StringUtils.isNotBlank(sortField),
-                sortOrder.equals(CommonConstant.SORT_ORDER_ASC), sortField);
-        Page<UserInterfaceInfo> userInterfaceInfoPage = userInterfaceInfoService.page(new Page<>(current, size), queryWrapper);
-        return ResultUtils.success(userInterfaceInfoPage);
+
+        Page<UserInterfaceInfo> interfaceInfoPage = userInterfaceInfoService.page(new Page<>(current, size),
+                userInterfaceInfoService.getQueryWrapper(userInterfaceInfoQueryRequest));
+        return ResultUtils.success(interfaceInfoPage);
     }
 
     // endregion

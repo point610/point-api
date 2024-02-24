@@ -199,6 +199,7 @@ declare namespace API {
     name?: string;
     pageSize?: number;
     requestHeader?: string;
+    requestParams?: string;
     responseHeader?: string;
     sortField?: string;
     sortOrder?: string;
@@ -267,32 +268,6 @@ declare namespace API {
     sortOrder?: string;
     tags?: string[];
     title?: string;
-    userId?: number;
-  };
-
-  type listUserInterfaceInfoByPageUsingGETParams = {
-    current?: number;
-    id?: number;
-    interfaceInfoId?: number;
-    leftNum?: number;
-    pageSize?: number;
-    sortField?: string;
-    sortOrder?: string;
-    status?: number;
-    totalNum?: number;
-    userId?: number;
-  };
-
-  type listUserInterfaceInfoUsingGETParams = {
-    current?: number;
-    id?: number;
-    interfaceInfoId?: number;
-    leftNum?: number;
-    pageSize?: number;
-    sortField?: string;
-    sortOrder?: string;
-    status?: number;
-    totalNum?: number;
     userId?: number;
   };
 
@@ -510,6 +485,19 @@ declare namespace API {
   type UserInterfaceInfoAddRequest = {
     interfaceInfoId?: number;
     leftNum?: number;
+    totalNum?: number;
+    userId?: number;
+  };
+
+  type UserInterfaceInfoQueryRequest = {
+    current?: number;
+    id?: number;
+    interfaceInfoId?: number;
+    leftNum?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    status?: number;
     totalNum?: number;
     userId?: number;
   };

@@ -106,5 +106,5 @@ create table if not exists post_favour
 
 
 delete
-from interface_info
+from user_interface_info
 where id > 8;

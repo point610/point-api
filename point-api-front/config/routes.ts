@@ -17,8 +17,12 @@ export default [
     routes: [
       {
         icon: 'table', path: '/admin/user', component: './Admin/User', name: '用户管理'
-      }, {
+      },
+      {
         icon: 'table', path: '/admin/interfaceinfo', component: './Admin/InterfaceInfo', name: '接口管理'
+      },
+   {
+        icon: 'table', path: '/admin/userinterfaceinfo', component: './Admin/UserInterfaceInfo', name: '用户接口管理'
       },
     ],
   },

@@ -14,6 +14,7 @@ import com.point.springbootinit.model.dto.post.PostQueryRequest;
 import com.point.springbootinit.model.dto.post.PostUpdateRequest;
 import com.point.springbootinit.model.entity.Post;
 import com.point.springbootinit.model.entity.User;
+import com.point.springbootinit.model.enums.PageEnum;
 import com.point.springbootinit.service.PostService;
 import com.point.springbootinit.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -181,7 +182,7 @@ public class PostController {
         // content 需支持模糊搜索
         postQuery.setContent(null);
         // 限制爬虫
-        if (size > 50) {
+        if (size > PageEnum.OnceLimit.getValue()) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         QueryWrapper<Post> queryWrapper = new QueryWrapper<>(postQuery);

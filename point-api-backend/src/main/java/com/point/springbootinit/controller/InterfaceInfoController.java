@@ -12,6 +12,7 @@ import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoUpdateReque
 import com.point.springbootinit.model.entity.InterfaceInfo;
 import com.point.springbootinit.model.entity.User;
 import com.point.springbootinit.model.enums.InterfaceInfoStatusEnum;
+import com.point.springbootinit.model.enums.PageEnum;
 import com.point.springbootinit.service.InterfaceInfoService;
 import com.point.springbootinit.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -172,7 +173,7 @@ public class InterfaceInfoController {
         long current = interfaceInfoQueryRequest.getCurrent();
         long size = interfaceInfoQueryRequest.getPageSize();
         // 限制爬虫
-        if (size > 50) {
+        if (size > PageEnum.OnceLimit.getValue()) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         Page<InterfaceInfo> interfaceInfoPage = interfaceInfoService.page(new Page<>(current, size),
