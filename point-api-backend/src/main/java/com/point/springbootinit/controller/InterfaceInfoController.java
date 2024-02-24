@@ -2,14 +2,11 @@ package com.point.springbootinit.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.google.gson.Gson;
 
 import com.point.springbootinit.annotation.AuthCheck;
 import com.point.springbootinit.common.*;
-import com.point.springbootinit.constant.CommonConstant;
 import com.point.springbootinit.exception.BusinessException;
 import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoAddRequest;
-import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoInvokeRequest;
 import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
 import com.point.springbootinit.model.entity.InterfaceInfo;
@@ -18,7 +15,6 @@ import com.point.springbootinit.model.enums.InterfaceInfoStatusEnum;
 import com.point.springbootinit.service.InterfaceInfoService;
 import com.point.springbootinit.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -173,24 +169,14 @@ public class InterfaceInfoController {
         if (interfaceInfoQueryRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        InterfaceInfo interfaceInfoQuery = new InterfaceInfo();
-        BeanUtils.copyProperties(interfaceInfoQueryRequest, interfaceInfoQuery);
         long current = interfaceInfoQueryRequest.getCurrent();
         long size = interfaceInfoQueryRequest.getPageSize();
-        String sortField = interfaceInfoQueryRequest.getSortField();
-        String sortOrder = interfaceInfoQueryRequest.getSortOrder();
-        String description = interfaceInfoQuery.getDescription();
-        // description 需支持模糊搜索
-        interfaceInfoQuery.setDescription(null);
         // 限制爬虫
         if (size > 50) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        QueryWrapper<InterfaceInfo> queryWrapper = new QueryWrapper<>(interfaceInfoQuery);
-        queryWrapper.like(StringUtils.isNotBlank(description), "description", description);
-        queryWrapper.orderBy(StringUtils.isNotBlank(sortField),
-                sortOrder.equals(CommonConstant.SORT_ORDER_ASC), sortField);
-        Page<InterfaceInfo> interfaceInfoPage = interfaceInfoService.page(new Page<>(current, size), queryWrapper);
+        Page<InterfaceInfo> interfaceInfoPage = interfaceInfoService.page(new Page<>(current, size),
+                interfaceInfoService.getQueryWrapper(interfaceInfoQueryRequest));
         return ResultUtils.success(interfaceInfoPage);
     }
 

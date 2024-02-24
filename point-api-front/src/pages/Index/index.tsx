@@ -9,7 +9,7 @@ import React, {useEffect, useState} from 'react';
  */
 const DEFAULT_PAGE_PARAMS: PageRequest = {
   current: 1,
-  pageSize: 4,
+  pageSize: 8,
   sortField: 'createTime',
   sortOrder: 'descend',
 };
