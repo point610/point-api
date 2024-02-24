@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * 接口信息
  */
-@TableName(value ="interface_info")
+@TableName(value = "interface_info")
 @Data
 public class InterfaceInfo implements Serializable {
     /**
@@ -29,6 +29,11 @@ public class InterfaceInfo implements Serializable {
     private String description;
 
     /**
+     * 图片
+     */
+    private String picture;
+
+    /**
      * 接口地址
      */
     private String url;
@@ -36,7 +41,7 @@ public class InterfaceInfo implements Serializable {
     /**
      * 请求参数
      * [
-     *   {"name": "username", "type": "string"}
+     * {"name": "username", "type": "string"}
      * ]
      */
     private String requestParams;

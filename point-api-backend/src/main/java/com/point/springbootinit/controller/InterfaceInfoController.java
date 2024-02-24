@@ -150,8 +150,8 @@ public class InterfaceInfoController {
      * @return
      */
     @AuthCheck(mustRole = "admin")
-    @GetMapping("/list")
-    public BaseResponse<List<InterfaceInfo>> listInterfaceInfo(InterfaceInfoQueryRequest interfaceInfoQueryRequest) {
+    @PostMapping("/list")
+    public BaseResponse<List<InterfaceInfo>> listInterfaceInfo(@RequestBody InterfaceInfoQueryRequest interfaceInfoQueryRequest) {
         InterfaceInfo interfaceInfoQuery = new InterfaceInfo();
         if (interfaceInfoQueryRequest != null) {
             BeanUtils.copyProperties(interfaceInfoQueryRequest, interfaceInfoQuery);
@@ -168,8 +168,8 @@ public class InterfaceInfoController {
      * @param request
      * @return
      */
-    @GetMapping("/list/page")
-    public BaseResponse<Page<InterfaceInfo>> listInterfaceInfoByPage(InterfaceInfoQueryRequest interfaceInfoQueryRequest, HttpServletRequest request) {
+    @PostMapping("/list/page")
+    public BaseResponse<Page<InterfaceInfo>> listInterfaceInfoByPage(@RequestBody InterfaceInfoQueryRequest interfaceInfoQueryRequest, HttpServletRequest request) {
         if (interfaceInfoQueryRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -224,7 +224,6 @@ public class InterfaceInfoController {
         boolean result = interfaceInfoService.updateById(interfaceInfo);
         return ResultUtils.success(result);
     }
-
 
 
 }

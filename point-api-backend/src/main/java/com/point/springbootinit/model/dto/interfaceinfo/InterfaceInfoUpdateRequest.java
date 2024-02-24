@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 /**
  * 更新请求
- *
  */
 @Data
 public class InterfaceInfoUpdateRequest implements Serializable {
@@ -26,6 +25,11 @@ public class InterfaceInfoUpdateRequest implements Serializable {
      * 描述
      */
     private String description;
+
+    /**
+     * 图片
+     */
+    private String picture;
 
     /**
      * 接口地址

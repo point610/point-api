@@ -5,7 +5,8 @@ create database if not exists point_api;
 -- 用户表
 use point_api;
 
-drop table user;
+
+alter database point_api character set utf8;
 
 -- 创建库
 create table if not exists user
@@ -28,6 +29,7 @@ create table if not exists user
     index idx_unionId (unionId)
 ) comment '用户' collate = utf8mb4_unicode_ci;
 
+drop table interface_info;
 
 -- 接口信息
 create table if not exists `interface_info`
@@ -35,6 +37,7 @@ create table if not exists `interface_info`
     `id`             bigint                             not null auto_increment comment '主键' primary key,
     `name`           varchar(256)                       not null comment '名称',
     `description`    varchar(256)                       null comment '描述',
+    `picture`        varchar(256)                       null comment '图片',
     `url`            varchar(512)                       not null comment '接口地址',
     `requestParams`  text                               not null comment '请求参数',
     `requestHeader`  text                               null comment '请求头',
@@ -45,7 +48,7 @@ create table if not exists `interface_info`
     `createTime`     datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     `updateTime`     datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     `isDelete`       tinyint  default 0                 not null comment '是否删除(0-未删, 1-已删)'
-) comment '接口信息';
+) comment '接口信息' collate = utf8mb4_unicode_ci;
 
 -- 用户调用接口关系表
 create table if not exists `user_interface_info`
@@ -59,7 +62,7 @@ create table if not exists `user_interface_info`
     `createTime`      datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     `updateTime`      datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     `isDelete`        tinyint  default 0                 not null comment '是否删除(0-未删, 1-已删)'
-) comment '用户调用接口关系';
+) comment '用户调用接口关系' collate = utf8mb4_unicode_ci;
 
 -- 帖子表
 create table if not exists post
@@ -87,7 +90,7 @@ create table if not exists post_thumb
     updateTime datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     index idx_postId (postId),
     index idx_userId (userId)
-) comment '帖子点赞';
+) comment '帖子点赞' collate = utf8mb4_unicode_ci;
 
 -- 帖子收藏表（硬删除）
 create table if not exists post_favour
@@ -99,4 +102,9 @@ create table if not exists post_favour
     updateTime datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     index idx_postId (postId),
     index idx_userId (userId)
-) comment '帖子收藏';
+) comment '帖子收藏' collate = utf8mb4_unicode_ci;
+
+
+delete
+from interface_info
+where id > 8;

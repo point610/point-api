@@ -170,6 +170,7 @@ declare namespace API {
     isDelete?: number;
     method?: string;
     name?: string;
+    picture?: string;
     requestHeader?: string;
     requestParams?: string;
     responseHeader?: string;
@@ -183,10 +184,27 @@ declare namespace API {
     description?: string;
     method?: string;
     name?: string;
+    picture?: string;
     requestHeader?: string;
     requestParams?: string;
     responseHeader?: string;
     url?: string;
+  };
+
+  type InterfaceInfoQueryRequest = {
+    current?: number;
+    description?: string;
+    id?: number;
+    method?: string;
+    name?: string;
+    pageSize?: number;
+    requestHeader?: string;
+    responseHeader?: string;
+    sortField?: string;
+    sortOrder?: string;
+    status?: number;
+    url?: string;
+    userId?: number;
   };
 
   type InterfaceInfoUpdateRequest = {
@@ -194,6 +212,7 @@ declare namespace API {
     id?: number;
     method?: string;
     name?: string;
+    picture?: string;
     requestHeader?: string;
     requestParams?: string;
     responseHeader?: string;
@@ -208,44 +227,13 @@ declare namespace API {
     isDelete?: number;
     method?: string;
     name?: string;
+    picture?: string;
     requestHeader?: string;
     requestParams?: string;
     responseHeader?: string;
     status?: number;
     totalNum?: number;
     updateTime?: string;
-    url?: string;
-    userId?: number;
-  };
-
-  type listInterfaceInfoByPageUsingGETParams = {
-    current?: number;
-    description?: string;
-    id?: number;
-    method?: string;
-    name?: string;
-    pageSize?: number;
-    requestHeader?: string;
-    responseHeader?: string;
-    sortField?: string;
-    sortOrder?: string;
-    status?: number;
-    url?: string;
-    userId?: number;
-  };
-
-  type listInterfaceInfoUsingGETParams = {
-    current?: number;
-    description?: string;
-    id?: number;
-    method?: string;
-    name?: string;
-    pageSize?: number;
-    requestHeader?: string;
-    responseHeader?: string;
-    sortField?: string;
-    sortOrder?: string;
-    status?: number;
     url?: string;
     userId?: number;
   };
