@@ -1,8 +1,9 @@
 import {listInterfaceInfoByPageUsingPost} from '@/services/backend/interfaceInfoController';
-import {PageContainer, ProFormSelect, ProFormText, QueryFilter} from '@ant-design/pro-components';
+import {PageContainer,  ProFormText, QueryFilter} from '@ant-design/pro-components';
 import {Card, Flex, Image, Input, List, message, Tabs, Typography} from 'antd';
 import moment from 'moment';
 import React, {useEffect, useState} from 'react';
+import {Link} from "umi";
 
 /**
  * 默认分页参数
@@ -137,21 +138,23 @@ const IndexPage: React.FC = () => {
         }}
         renderItem={(data) => (
           <List.Item>
-            <Card hoverable cover={<Image alt={data.name} src={data.picture}/>}>
-              <Card.Meta
-                title={<a>{data.name}</a>}
-                description={
-                  <Typography.Paragraph ellipsis={{rows: 2}} style={{height: 44}}>
-                    {data.description}
-                  </Typography.Paragraph>
-                }
-              />
-              <Flex justify="space-between" align="center">
-                <Typography.Text type="secondary" style={{fontSize: 12}}>
-                  {moment(data.createTime).fromNow()}
-                </Typography.Text>
-              </Flex>
-            </Card>
+            <Link to={`/interfaceinfo/detail/${data.id}`}>
+              <Card hoverable cover={<Image alt={data.name} src={data.picture}/>}>
+                <Card.Meta
+                  title={<a>{data.name}</a>}
+                  description={
+                    <Typography.Paragraph ellipsis={{rows: 2}} style={{height: 44}}>
+                      {data.description}
+                    </Typography.Paragraph>
+                  }
+                />
+                <Flex justify="space-between" align="center">
+                  <Typography.Text type="secondary" style={{fontSize: 12}}>
+                    {moment(data.createTime).fromNow()}
+                  </Typography.Text>
+                </Flex>
+              </Card>
+            </Link>
           </List.Item>
         )}
       />

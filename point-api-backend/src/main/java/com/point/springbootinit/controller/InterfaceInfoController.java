@@ -13,6 +13,8 @@ import com.point.springbootinit.model.entity.InterfaceInfo;
 import com.point.springbootinit.model.entity.User;
 import com.point.springbootinit.model.enums.InterfaceInfoStatusEnum;
 import com.point.springbootinit.model.enums.PageEnum;
+import com.point.springbootinit.model.vo.InterfaceInfoVO;
+import com.point.springbootinit.model.vo.UserVO;
 import com.point.springbootinit.service.InterfaceInfoService;
 import com.point.springbootinit.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -132,12 +134,24 @@ public class InterfaceInfoController {
      * @return
      */
     @GetMapping("/get")
-    public BaseResponse<InterfaceInfo> getInterfaceInfoById(long id) {
+    public BaseResponse<InterfaceInfoVO> getInterfaceInfoById(long id) {
         if (id <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
+
+        // 获取接口信息和用户信息
         InterfaceInfo interfaceInfo = interfaceInfoService.getById(id);
-        return ResultUtils.success(interfaceInfo);
+        Long userId = interfaceInfo.getUserId();
+        User user = userService.getById(userId);
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(user, userVO);
+
+        // 封装
+        InterfaceInfoVO interfaceInfoVO = new InterfaceInfoVO();
+        BeanUtils.copyProperties(interfaceInfo, interfaceInfoVO);
+        interfaceInfoVO.setUserVO(userVO);
+
+        return ResultUtils.success(interfaceInfoVO);
     }
 
     /**
