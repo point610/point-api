@@ -5,21 +5,45 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponseGeneratorVO_ = {
-    code?: number;
-    data?: GeneratorVO;
-    message?: string;
-  };
-
   type BaseResponseInt_ = {
     code?: number;
     data?: number;
     message?: string;
   };
 
-  type BaseResponseLoginUserVO_ = {
+  type BaseResponseInterfaceInfo_ = {
     code?: number;
-    data?: LoginUserVO;
+    data?: InterfaceInfo;
+    message?: string;
+  };
+
+  type BaseResponseListInterfaceInfo_ = {
+    code?: number;
+    data?: InterfaceInfo[];
+    message?: string;
+  };
+
+  type BaseResponseListInterfaceInfoVO_ = {
+    code?: number;
+    data?: InterfaceInfoVO[];
+    message?: string;
+  };
+
+  type BaseResponseListPost_ = {
+    code?: number;
+    data?: Post[];
+    message?: string;
+  };
+
+  type BaseResponseListUserInterfaceInfo_ = {
+    code?: number;
+    data?: UserInterfaceInfo[];
+    message?: string;
+  };
+
+  type BaseResponseListUserVO_ = {
+    code?: number;
+    data?: UserVO[];
     message?: string;
   };
 
@@ -29,15 +53,9 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponsePageGenerator_ = {
+  type BaseResponsePageInterfaceInfo_ = {
     code?: number;
-    data?: PageGenerator_;
-    message?: string;
-  };
-
-  type BaseResponsePageGeneratorVO_ = {
-    code?: number;
-    data?: PageGeneratorVO_;
+    data?: PageInterfaceInfo_;
     message?: string;
   };
 
@@ -59,15 +77,21 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponsePageUserInterfaceInfo_ = {
+    code?: number;
+    data?: PageUserInterfaceInfo_;
+    message?: string;
+  };
+
   type BaseResponsePageUserVO_ = {
     code?: number;
     data?: PageUserVO_;
     message?: string;
   };
 
-  type BaseResponsePostVO_ = {
+  type BaseResponsePost_ = {
     code?: number;
-    data?: PostVO;
+    data?: Post;
     message?: string;
   };
 
@@ -80,6 +104,12 @@ declare namespace API {
   type BaseResponseUser_ = {
     code?: number;
     data?: User;
+    message?: string;
+  };
+
+  type BaseResponseUserInterfaceInfo_ = {
+    code?: number;
+    data?: UserInterfaceInfo;
     message?: string;
   };
 
@@ -104,132 +134,12 @@ declare namespace API {
     id?: number;
   };
 
-  type FileConfigDTO = {
-    files?: FilesDTO[];
-    inputRootPath?: string;
-    outputRootPath?: string;
-    sourceRootPath?: string;
-    type?: string;
-  };
-
-  type FilesDTO = {
-    condition?: string;
-    files?: FilesDTO[];
-    generateType?: string;
-    groupKey?: string;
-    groupName?: string;
-    inputPath?: string;
-    outputPath?: string;
-    type?: string;
-  };
-
-  type Generator = {
-    author?: string;
-    basePackage?: string;
-    createTime?: string;
-    description?: string;
-    distPath?: string;
-    fileConfig?: string;
-    id?: number;
-    isDelete?: number;
-    modelConfig?: string;
-    name?: string;
-    picture?: string;
-    status?: number;
-    tags?: string;
-    updateTime?: string;
-    userId?: number;
-    version?: string;
-  };
-
-  type GeneratorAddRequest = {
-    author?: string;
-    basePackage?: string;
-    description?: string;
-    distPath?: string;
-    fileConfig?: FileConfigDTO;
-    modelConfig?: ModelConfigDTO;
-    name?: string;
-    picture?: string;
-    status?: number;
-    tags?: string[];
-    version?: string;
-  };
-
-  type GeneratorEditRequest = {
-    author?: string;
-    basePackage?: string;
-    description?: string;
-    distPath?: string;
-    fileConfig?: FileConfigDTO;
-    id?: number;
-    modelConfig?: ModelConfigDTO;
-    name?: string;
-    picture?: string;
-    tags?: string[];
-    version?: string;
-  };
-
-  type GeneratorQueryRequest = {
-    author?: string;
-    basePackage?: string;
-    current?: number;
-    description?: string;
-    distPath?: string;
-    id?: number;
-    name?: string;
-    notId?: number;
-    orTags?: string[];
-    pageSize?: number;
-    searchText?: string;
-    sortField?: string;
-    sortOrder?: string;
-    status?: number;
-    tags?: string[];
-    userId?: number;
-    version?: string;
-  };
-
-  type GeneratorUpdateRequest = {
-    author?: string;
-    basePackage?: string;
-    description?: string;
-    distPath?: string;
-    fileConfig?: FileConfigDTO;
-    id?: number;
-    modelConfig?: ModelConfigDTO;
-    name?: string;
-    picture?: string;
-    status?: number;
-    tags?: string[];
-    version?: string;
-  };
-
-  type GeneratorVO = {
-    author?: string;
-    basePackage?: string;
-    createTime?: string;
-    description?: string;
-    distPath?: string;
-    fileConfig?: FileConfigDTO;
-    id?: number;
-    modelConfig?: ModelConfigDTO;
-    name?: string;
-    picture?: string;
-    status?: number;
-    tags?: string[];
-    updateTime?: string;
-    user?: UserVO;
-    userId?: number;
-    version?: string;
-  };
-
-  type getGeneratorVOByIdUsingGETParams = {
+  type getInterfaceInfoByIdUsingGETParams = {
     /** id */
     id?: number;
   };
 
-  type getPostVOByIdUsingGETParams = {
+  type getPostByIdUsingGETParams = {
     /** id */
     id?: number;
   };
@@ -239,36 +149,176 @@ declare namespace API {
     id?: number;
   };
 
+  type getUserInterfaceInfoByIdUsingGETParams = {
+    /** id */
+    id?: number;
+  };
+
   type getUserVOByIdUsingGETParams = {
     /** id */
     id?: number;
   };
 
-  type LoginUserVO = {
-    createTime?: string;
+  type IdRequest = {
     id?: number;
+  };
+
+  type InterfaceInfo = {
+    createTime?: string;
+    description?: string;
+    id?: number;
+    isDelete?: number;
+    method?: string;
+    name?: string;
+    requestHeader?: string;
+    requestParams?: string;
+    responseHeader?: string;
+    status?: number;
     updateTime?: string;
-    userAvatar?: string;
+    url?: string;
+    userId?: number;
+  };
+
+  type InterfaceInfoAddRequest = {
+    description?: string;
+    method?: string;
+    name?: string;
+    requestHeader?: string;
+    requestParams?: string;
+    responseHeader?: string;
+    url?: string;
+  };
+
+  type InterfaceInfoUpdateRequest = {
+    description?: string;
+    id?: number;
+    method?: string;
+    name?: string;
+    requestHeader?: string;
+    requestParams?: string;
+    responseHeader?: string;
+    status?: number;
+    url?: string;
+  };
+
+  type InterfaceInfoVO = {
+    createTime?: string;
+    description?: string;
+    id?: number;
+    isDelete?: number;
+    method?: string;
+    name?: string;
+    requestHeader?: string;
+    requestParams?: string;
+    responseHeader?: string;
+    status?: number;
+    totalNum?: number;
+    updateTime?: string;
+    url?: string;
+    userId?: number;
+  };
+
+  type listInterfaceInfoByPageUsingGETParams = {
+    current?: number;
+    description?: string;
+    id?: number;
+    method?: string;
+    name?: string;
+    pageSize?: number;
+    requestHeader?: string;
+    responseHeader?: string;
+    sortField?: string;
+    sortOrder?: string;
+    status?: number;
+    url?: string;
+    userId?: number;
+  };
+
+  type listInterfaceInfoUsingGETParams = {
+    current?: number;
+    description?: string;
+    id?: number;
+    method?: string;
+    name?: string;
+    pageSize?: number;
+    requestHeader?: string;
+    responseHeader?: string;
+    sortField?: string;
+    sortOrder?: string;
+    status?: number;
+    url?: string;
+    userId?: number;
+  };
+
+  type listPostByPageUsingGETParams = {
+    content?: string;
+    current?: number;
+    favourUserId?: number;
+    id?: number;
+    notId?: number;
+    orTags?: string[];
+    pageSize?: number;
+    searchText?: string;
+    sortField?: string;
+    sortOrder?: string;
+    tags?: string[];
+    title?: string;
+    userId?: number;
+  };
+
+  type listPostUsingGETParams = {
+    content?: string;
+    current?: number;
+    favourUserId?: number;
+    id?: number;
+    notId?: number;
+    orTags?: string[];
+    pageSize?: number;
+    searchText?: string;
+    sortField?: string;
+    sortOrder?: string;
+    tags?: string[];
+    title?: string;
+    userId?: number;
+  };
+
+  type listUserInterfaceInfoByPageUsingGETParams = {
+    current?: number;
+    id?: number;
+    interfaceInfoId?: number;
+    leftNum?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    status?: number;
+    totalNum?: number;
+    userId?: number;
+  };
+
+  type listUserInterfaceInfoUsingGETParams = {
+    current?: number;
+    id?: number;
+    interfaceInfoId?: number;
+    leftNum?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    status?: number;
+    totalNum?: number;
+    userId?: number;
+  };
+
+  type listUserUsingGETParams = {
+    current?: number;
+    id?: number;
+    mpOpenId?: string;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    unionId?: string;
     userName?: string;
     userProfile?: string;
     userRole?: string;
-  };
-
-  type ModelConfigDTO = {
-    models?: ModelsDTO[];
-  };
-
-  type ModelsDTO = {
-    abbr?: string;
-    allArgsStr?: string;
-    condition?: string;
-    defaultValue?: Record<string, any>;
-    description?: string;
-    fieldName?: string;
-    groupKey?: string;
-    groupName?: string;
-    models?: ModelsDTO[];
-    type?: string;
   };
 
   type OrderItem = {
@@ -276,27 +326,14 @@ declare namespace API {
     column?: string;
   };
 
-  type PageGenerator_ = {
+  type PageInterfaceInfo_ = {
     countId?: string;
     current?: number;
     maxLimit?: number;
     optimizeCountSql?: boolean;
     orders?: OrderItem[];
     pages?: number;
-    records?: Generator[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type PageGeneratorVO_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
-    records?: GeneratorVO[];
+    records?: InterfaceInfo[];
     searchCount?: boolean;
     size?: number;
     total?: number;
@@ -341,6 +378,19 @@ declare namespace API {
     total?: number;
   };
 
+  type PageUserInterfaceInfo_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: UserInterfaceInfo[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
   type PageUserVO_ = {
     countId?: string;
     current?: number;
@@ -369,13 +419,6 @@ declare namespace API {
 
   type PostAddRequest = {
     content?: string;
-    tags?: string[];
-    title?: string;
-  };
-
-  type PostEditRequest = {
-    content?: string;
-    id?: number;
     tags?: string[];
     title?: string;
   };
@@ -440,10 +483,13 @@ declare namespace API {
   };
 
   type User = {
+    accessKey?: string;
     createTime?: string;
+    gender?: number;
     id?: number;
     isDelete?: number;
     mpOpenId?: string;
+    secretKey?: string;
     unionId?: string;
     updateTime?: string;
     userAccount?: string;
@@ -461,9 +507,30 @@ declare namespace API {
     userRole?: string;
   };
 
-  type userLoginByWxOpenUsingGETParams = {
-    /** code */
-    code: string;
+  type UserInterfaceInfo = {
+    createTime?: string;
+    id?: number;
+    interfaceInfoId?: number;
+    isDelete?: number;
+    leftNum?: number;
+    status?: number;
+    totalNum?: number;
+    updateTime?: string;
+    userId?: number;
+  };
+
+  type UserInterfaceInfoAddRequest = {
+    interfaceInfoId?: number;
+    leftNum?: number;
+    totalNum?: number;
+    userId?: number;
+  };
+
+  type UserInterfaceInfoUpdateRequest = {
+    id?: number;
+    leftNum?: number;
+    status?: number;
+    totalNum?: number;
   };
 
   type UserLoginRequest = {

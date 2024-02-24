@@ -6,10 +6,14 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.point.springbootinit.model.dto.post.PostQueryRequest;
 import com.point.springbootinit.model.entity.Post;
 import com.point.springbootinit.model.vo.PostVO;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * 帖子服务
+ *
+ * 
+ * 
  */
 public interface PostService extends IService<Post> {
 

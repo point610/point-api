@@ -46,7 +46,7 @@ export async function getUserByIdUsingGet(
 
 /** getLoginUser GET /api/user/get/login */
 export async function getLoginUserUsingGet(options?: { [key: string]: any }) {
-  return request<API.BaseResponseLoginUserVO_>('/api/user/get/login', {
+  return request<API.BaseResponseUserVO_>('/api/user/get/login', {
     method: 'GET',
     ...(options || {}),
   });
@@ -59,6 +59,21 @@ export async function getUserVoByIdUsingGet(
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseUserVO_>('/api/user/get/vo', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
+/** listUser GET /api/user/list */
+export async function listUserUsingGet(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.listUserUsingGETParams,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseListUserVO_>('/api/user/list', {
     method: 'GET',
     params: {
       ...params,
@@ -102,27 +117,12 @@ export async function userLoginUsingPost(
   body: API.UserLoginRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseLoginUserVO_>('/api/user/login', {
+  return request<API.BaseResponseUser_>('/api/user/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     data: body,
-    ...(options || {}),
-  });
-}
-
-/** userLoginByWxOpen GET /api/user/login/wx_open */
-export async function userLoginByWxOpenUsingGet(
-  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.userLoginByWxOpenUsingGETParams,
-  options?: { [key: string]: any },
-) {
-  return request<API.BaseResponseLoginUserVO_>('/api/user/login/wx_open', {
-    method: 'GET',
-    params: {
-      ...params,
-    },
     ...(options || {}),
   });
 }
