@@ -1,0 +1,9 @@
+# 公共配置文件
+server:
+  port: 8123
+  servlet:
+    context-path: /api
+pointapi:
+  client:
+    access-key: xxx
+    secret-key: xxx
