@@ -1,7 +1,7 @@
 package com.point.springbootinit.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.point.springbootinit.model.entity.UserInterfaceInfo;
+import com.point.apicommon.model.entity.UserInterfaceInfo;
 
 import java.util.List;
 

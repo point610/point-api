@@ -2,7 +2,8 @@ package com.point.springbootinit.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
+import com.point.apicommon.model.entity.User;
+import com.point.apicommon.model.vo.UserVO;
 import com.point.springbootinit.annotation.AuthCheck;
 import com.point.springbootinit.common.BaseResponse;
 import com.point.springbootinit.common.DeleteRequest;
@@ -12,8 +13,6 @@ import com.point.springbootinit.constant.UserConstant;
 import com.point.springbootinit.exception.BusinessException;
 import com.point.springbootinit.exception.ThrowUtils;
 import com.point.springbootinit.model.dto.user.*;
-import com.point.springbootinit.model.entity.User;
-import com.point.springbootinit.model.vo.UserVO;
 import com.point.springbootinit.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;

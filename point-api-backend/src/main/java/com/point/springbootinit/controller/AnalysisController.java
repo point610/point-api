@@ -2,15 +2,15 @@ package com.point.springbootinit.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
+import com.point.apicommon.model.entity.InterfaceInfo;
+import com.point.apicommon.model.entity.UserInterfaceInfo;
+import com.point.apicommon.model.vo.InterfaceInfoVO;
 import com.point.springbootinit.annotation.AuthCheck;
 import com.point.springbootinit.common.BaseResponse;
 import com.point.springbootinit.common.ErrorCode;
 import com.point.springbootinit.common.ResultUtils;
 import com.point.springbootinit.exception.BusinessException;
 import com.point.springbootinit.mapper.UserInterfaceInfoMapper;
-import com.point.springbootinit.model.entity.InterfaceInfo;
-import com.point.springbootinit.model.entity.UserInterfaceInfo;
-import com.point.springbootinit.model.vo.InterfaceInfoVO;
 import com.point.springbootinit.service.InterfaceInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;

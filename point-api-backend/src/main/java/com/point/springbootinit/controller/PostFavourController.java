@@ -1,6 +1,8 @@
 package com.point.springbootinit.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.point.apicommon.model.entity.Post;
+import com.point.apicommon.model.entity.User;
 import com.point.springbootinit.common.BaseResponse;
 import com.point.springbootinit.common.ErrorCode;
 import com.point.springbootinit.common.ResultUtils;
@@ -9,8 +11,6 @@ import com.point.springbootinit.exception.ThrowUtils;
 import com.point.springbootinit.model.dto.post.PostQueryRequest;
 import com.point.springbootinit.model.dto.postfavour.PostFavourAddRequest;
 import com.point.springbootinit.model.dto.postfavour.PostFavourQueryRequest;
-import com.point.springbootinit.model.entity.Post;
-import com.point.springbootinit.model.entity.User;
 import com.point.springbootinit.model.vo.PostVO;
 import com.point.springbootinit.service.PostFavourService;
 import com.point.springbootinit.service.PostService;

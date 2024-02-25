@@ -1,7 +1,8 @@
 package com.point.springbootinit.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.point.springbootinit.model.entity.Post;
+import com.point.apicommon.model.entity.Post;
+
 import java.util.Date;
 import java.util.List;
 

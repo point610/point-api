@@ -2,9 +2,11 @@ package com.point.springbootinit.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.point.springbootinit.model.entity.Post;
-import com.point.springbootinit.model.entity.User;
+
 import javax.annotation.Resource;
+
+import com.point.apicommon.model.entity.Post;
+import com.point.apicommon.model.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -12,9 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * 帖子收藏服务测试
- *
- * 
- * 
  */
 @SpringBootTest
 class PostFavourServiceTest {

@@ -100,3 +100,12 @@ knife4j:
         api-rule: package
         api-rule-resources:
           - com.point.springbootinit.controller
+dubbo:
+  application:
+    name: dubbo-point-api-backend
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    id: nacos-registry
+    address: nacos://localhost:8848

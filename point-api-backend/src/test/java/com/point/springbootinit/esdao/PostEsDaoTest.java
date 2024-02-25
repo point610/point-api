@@ -1,8 +1,8 @@
 package com.point.springbootinit.esdao;
 
+import com.point.apicommon.model.entity.Post;
 import com.point.springbootinit.model.dto.post.PostEsDTO;
 import com.point.springbootinit.model.dto.post.PostQueryRequest;
-import com.point.springbootinit.model.entity.Post;
 import com.point.springbootinit.service.PostService;
 import java.util.Arrays;
 import java.util.Date;

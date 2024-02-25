@@ -3,14 +3,12 @@ package com.point.springbootinit.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.point.apicommon.model.entity.InterfaceInfo;
 import com.point.springbootinit.common.ErrorCode;
 import com.point.springbootinit.constant.CommonConstant;
 import com.point.springbootinit.exception.BusinessException;
 import com.point.springbootinit.mapper.InterfaceInfoMapper;
 import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
-import com.point.springbootinit.model.dto.user.UserQueryRequest;
-import com.point.springbootinit.model.entity.InterfaceInfo;
-import com.point.springbootinit.model.entity.User;
 import com.point.springbootinit.service.InterfaceInfoService;
 import com.point.springbootinit.utils.SqlUtils;
 import org.apache.commons.lang3.StringUtils;

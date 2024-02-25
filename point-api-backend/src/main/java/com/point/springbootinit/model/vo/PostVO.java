@@ -1,10 +1,12 @@
 package com.point.springbootinit.model.vo;
 
 import cn.hutool.json.JSONUtil;
-import com.point.springbootinit.model.entity.Post;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import com.point.apicommon.model.entity.Post;
+import com.point.apicommon.model.vo.UserVO;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 

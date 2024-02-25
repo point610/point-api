@@ -6,9 +6,8 @@ import java.util.Date;
 import javax.annotation.Resource;
 
 import cn.hutool.core.date.DateTime;
+import com.point.apicommon.model.entity.UserInterfaceInfo;
 import com.point.apisdk.client.PointApiClient;
-import com.point.springbootinit.model.entity.InterfaceInfo;
-import com.point.springbootinit.model.entity.UserInterfaceInfo;
 import com.point.springbootinit.service.InterfaceInfoService;
 import com.point.springbootinit.service.UserInterfaceInfoService;
 import org.junit.jupiter.api.Test;

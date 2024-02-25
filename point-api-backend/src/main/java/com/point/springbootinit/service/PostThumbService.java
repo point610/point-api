@@ -1,8 +1,9 @@
 package com.point.springbootinit.service;
 
-import com.point.springbootinit.model.entity.PostThumb;
+
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.point.springbootinit.model.entity.User;
+import com.point.apicommon.model.entity.PostThumb;
+import com.point.apicommon.model.entity.User;
 
 /**
  * 帖子点赞服务

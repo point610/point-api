@@ -1,19 +1,17 @@
 package com.point.springbootinit.service;
 
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.point.apicommon.model.entity.Post;
 import com.point.springbootinit.model.dto.post.PostQueryRequest;
-import com.point.springbootinit.model.entity.Post;
 import com.point.springbootinit.model.vo.PostVO;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * 帖子服务
- *
- * 
- * 
  */
 public interface PostService extends IService<Post> {
 

@@ -1,7 +1,7 @@
 package com.point.springbootinit.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.point.springbootinit.model.entity.InterfaceInfo;
+import com.point.apicommon.model.entity.InterfaceInfo;
 
 /**
 * 接口信息

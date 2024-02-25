@@ -4,15 +4,15 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.point.apicommon.model.entity.InterfaceInfo;
+import com.point.apicommon.model.entity.User;
+import com.point.apicommon.model.entity.UserInterfaceInfo;
 import com.point.springbootinit.common.ErrorCode;
 import com.point.springbootinit.constant.CommonConstant;
 import com.point.springbootinit.exception.BusinessException;
 import com.point.springbootinit.mapper.UserInterfaceInfoMapper;
 import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import com.point.springbootinit.model.dto.userinterfaceinfo.UserInterfaceInfoQueryRequest;
-import com.point.springbootinit.model.entity.InterfaceInfo;
-import com.point.springbootinit.model.entity.User;
-import com.point.springbootinit.model.entity.UserInterfaceInfo;
 import com.point.springbootinit.service.InterfaceInfoService;
 import com.point.springbootinit.service.UserInterfaceInfoService;
 import com.point.springbootinit.service.UserService;

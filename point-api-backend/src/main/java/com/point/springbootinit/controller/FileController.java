@@ -1,6 +1,8 @@
 package com.point.springbootinit.controller;
 
 import cn.hutool.core.io.FileUtil;
+import com.point.apicommon.model.entity.User;
+import com.point.apicommon.model.enums.FileUploadBizEnum;
 import com.point.springbootinit.common.BaseResponse;
 import com.point.springbootinit.common.ErrorCode;
 import com.point.springbootinit.common.ResultUtils;
@@ -8,8 +10,6 @@ import com.point.springbootinit.constant.FileConstant;
 import com.point.springbootinit.exception.BusinessException;
 import com.point.springbootinit.manager.CosManager;
 import com.point.springbootinit.model.dto.file.UploadFileRequest;
-import com.point.springbootinit.model.entity.User;
-import com.point.springbootinit.model.enums.FileUploadBizEnum;
 import com.point.springbootinit.service.UserService;
 import java.io.File;
 import java.util.Arrays;

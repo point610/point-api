@@ -10,13 +10,18 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.point</groupId>
-    <artifactId>springboot-init</artifactId>
+    <artifactId>point-api-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springboot-init</name>
     <properties>
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.point</groupId>
+            <artifactId>point-api-common</artifactId>
+            <version>0.0.1</version>
+        </dependency>
         <dependency>
             <groupId>com.point</groupId>
             <artifactId>point-api-sdk</artifactId>
@@ -119,6 +124,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.dubbo/dubbo -->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>3.0.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>2.1.0</version>
         </dependency>
     </dependencies>
 

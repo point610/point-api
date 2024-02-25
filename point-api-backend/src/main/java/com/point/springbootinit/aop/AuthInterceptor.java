@@ -1,10 +1,10 @@
 package com.point.springbootinit.aop;
 
+import com.point.apicommon.model.entity.User;
+import com.point.apicommon.model.enums.UserRoleEnum;
 import com.point.springbootinit.annotation.AuthCheck;
 import com.point.springbootinit.common.ErrorCode;
 import com.point.springbootinit.exception.BusinessException;
-import com.point.springbootinit.model.entity.User;
-import com.point.springbootinit.model.enums.UserRoleEnum;
 import com.point.springbootinit.service.UserService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

@@ -3,10 +3,8 @@ package com.point.springbootinit.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.point.apicommon.model.entity.InterfaceInfo;
 import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
-import com.point.springbootinit.model.dto.user.UserQueryRequest;
-import com.point.springbootinit.model.entity.InterfaceInfo;
-import com.point.springbootinit.model.entity.User;
 
 /**
  * 接口信息服务

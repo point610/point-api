@@ -1,8 +1,9 @@
-package com.point.springbootinit.model.vo;
+package com.point.apicommon.model.vo;
+
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 已登录用户视图（脱敏）

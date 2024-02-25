@@ -1,11 +1,11 @@
 package com.point.springbootinit.controller;
 
+import com.point.apicommon.model.entity.User;
 import com.point.springbootinit.common.BaseResponse;
 import com.point.springbootinit.common.ErrorCode;
 import com.point.springbootinit.common.ResultUtils;
 import com.point.springbootinit.exception.BusinessException;
 import com.point.springbootinit.model.dto.postthumb.PostThumbAddRequest;
-import com.point.springbootinit.model.entity.User;
 import com.point.springbootinit.service.PostThumbService;
 import com.point.springbootinit.service.UserService;
 import javax.annotation.Resource;

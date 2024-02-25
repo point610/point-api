@@ -3,9 +3,9 @@ package com.point.springbootinit.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.point.apicommon.model.entity.User;
+import com.point.apicommon.model.vo.UserVO;
 import com.point.springbootinit.model.dto.user.UserQueryRequest;
-import com.point.springbootinit.model.entity.User;
-import com.point.springbootinit.model.vo.UserVO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -82,6 +82,7 @@ public interface UserService extends IService<User> {
      * @return
      */
     UserVO getUserVO(User user);
+
     /**
      * 获取查询条件
      *
