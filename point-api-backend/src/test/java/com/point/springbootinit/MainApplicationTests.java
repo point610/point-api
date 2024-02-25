@@ -47,7 +47,7 @@ class MainApplicationTests {
 
     @Test
     void interfacetest() {
-        System.out.println(pointApiClient.getNameByGet("我是point"));
+        System.out.println(pointApiClient.getRandomBoringTalk());
     }
 
 }
