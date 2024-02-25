@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.annotation.Resource;
 
 import cn.hutool.core.date.DateTime;
+import com.point.apisdk.client.PointApiClient;
 import com.point.springbootinit.model.entity.InterfaceInfo;
 import com.point.springbootinit.model.entity.UserInterfaceInfo;
 import com.point.springbootinit.service.InterfaceInfoService;
@@ -23,6 +24,8 @@ class MainApplicationTests {
     private InterfaceInfoService interfaceInfoService;
     @Resource
     private UserInterfaceInfoService userInterfaceInfoService;
+    @Resource
+    private PointApiClient pointApiClient;
 
     @Test
     void contextLoads() {
@@ -40,6 +43,11 @@ class MainApplicationTests {
             userInterfaceInfoService.save(userInterfaceInfo);
 
         }
+    }
+
+    @Test
+    void interfacetest() {
+        System.out.println(pointApiClient.getNameByGet("我是point"));
     }
 
 }
