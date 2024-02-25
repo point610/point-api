@@ -11,17 +11,17 @@ spring:
           uri: http://localhost:8123
           predicates:
             - Path=/api/**
-#        - id: add_request_header_route
-#          uri: http://localhost:8123
-#          predicates:
-#            - Path=/api/**
-#          filters:
-#            - AddRequestHeader=point, swag
-#            - AddRequestParameter=name, dog
-#            - name: CircuitBreaker
-#              args:
-#                name: myCircuitBreaker
-#                fallbackUri: forward:/fallback
+        - id: add_request_header_route
+          uri: http://localhost:8123
+          predicates:
+            - Path=/api/**
+          filters:
+            - AddRequestHeader=point, 666
+            - AddRequestParameter=name, dog
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/fallback
 #        - id: point-fallback
 #          uri: https://github.com/point610
 #          predicates:

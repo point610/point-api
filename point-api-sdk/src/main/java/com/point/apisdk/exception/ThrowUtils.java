@@ -1,5 +1,7 @@
 package com.point.apisdk.exception;
 
+import com.point.apisdk.common.ErrorCode;
+
 /**
  * 抛异常工具类
  */

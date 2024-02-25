@@ -1,6 +1,8 @@
 package com.point.apisdk.exception;
 
 
+import com.point.apisdk.common.ErrorCode;
+
 /**
  * 自定义异常类
  */
