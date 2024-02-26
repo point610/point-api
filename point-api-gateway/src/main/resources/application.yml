@@ -22,10 +22,6 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/fallback
-#        - id: point-fallback
-#          uri: https://github.com/point610
-#          predicates:
-#            - Path=/fallback
 logging:
   level:
     org:

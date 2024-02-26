@@ -4,6 +4,7 @@
 // API 唯一标识：
 import * as analysisController from './analysisController';
 import * as fileController from './fileController';
+import * as imgController from './imgController';
 import * as interfaceInfoController from './interfaceInfoController';
 import * as postController from './postController';
 import * as postFavourController from './postFavourController';
@@ -15,6 +16,7 @@ export default {
   wxMpController,
   analysisController,
   fileController,
+  imgController,
   interfaceInfoController,
   postController,
   postFavourController,

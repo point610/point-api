@@ -1,8 +1,10 @@
-import { addUserUsingPost } from '@/services/backend/userController';
-import { ProColumns, ProTable } from '@ant-design/pro-components';
+import {addUserUsingPost} from '@/services/backend/userController';
+import {ProColumns, ProTable} from '@ant-design/pro-components';
 import '@umijs/max';
-import { message, Modal } from 'antd';
+import {message, Modal} from 'antd';
 import React from 'react';
+import PictureUploader from "@/components/PictureUploader";
+import {ProFormItem} from "@ant-design/pro-form";
 
 interface Props {
   visible: boolean;
@@ -35,8 +37,9 @@ const handleAdd = async (fields: API.UserAddRequest) => {
  * @constructor
  */
 const CreateModal: React.FC<Props> = (props) => {
-  const { visible, columns, onSubmit, onCancel } = props;
-
+  const {visible, columns, onSubmit, onCancel} = props;
+  // 复制原始的columns数组
+  // 添加上传图片的列
   return (
     <Modal
       destroyOnClose

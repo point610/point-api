@@ -5,7 +5,7 @@ import {PlusOutlined} from '@ant-design/icons';
 import type {ActionType, ProColumns} from '@ant-design/pro-components';
 import {PageContainer, ProTable} from '@ant-design/pro-components';
 import '@umijs/max';
-import {Button, message, Space, Typography} from 'antd';
+import {Button, message, Space, Typography, Upload} from 'antd';
 import React, {useRef, useState} from 'react';
 
 /**
@@ -72,6 +72,7 @@ const UserAdminPage: React.FC = () => {
       fieldProps: {
         width: 64,
       },
+      hideInForm: true,
       hideInSearch: true,
     },
     {

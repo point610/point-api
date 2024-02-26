@@ -27,4 +27,7 @@ public interface UserInterfaceInfoService extends IService<UserInterfaceInfo> {
      * 获取查询条件
      */
     QueryWrapper<UserInterfaceInfo> getQueryWrapper(UserInterfaceInfoQueryRequest userInterfaceInfoQueryRequest);
+
+
+
 }

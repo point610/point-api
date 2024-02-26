@@ -17,6 +17,12 @@ export default [
     hideInMenu: true,
   },
   {
+    path: '/account/center',
+    icon: 'home',
+    component: './User/Detail',
+    name: '个人中心',
+  },
+  {
     path: '/admin',
     icon: 'crown',
     name: '管理页',

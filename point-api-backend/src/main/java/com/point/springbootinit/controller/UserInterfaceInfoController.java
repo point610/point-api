@@ -1,24 +1,28 @@
 package com.point.springbootinit.controller;
 
+import java.util.Date;
+
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.point.apicommon.model.entity.InterfaceInfo;
 import com.point.apicommon.model.entity.User;
 import com.point.apicommon.model.entity.UserInterfaceInfo;
 import com.point.apicommon.model.enums.PageEnum;
 import com.point.springbootinit.annotation.AuthCheck;
-import com.point.springbootinit.common.BaseResponse;
-import com.point.springbootinit.common.DeleteRequest;
-import com.point.springbootinit.common.ErrorCode;
-import com.point.springbootinit.common.ResultUtils;
+import com.point.springbootinit.common.*;
 import com.point.springbootinit.constant.UserConstant;
 import com.point.springbootinit.exception.BusinessException;
+import com.point.springbootinit.exception.ThrowUtils;
 import com.point.springbootinit.model.dto.userinterfaceinfo.UserInterfaceInfoAddRequest;
 import com.point.springbootinit.model.dto.userinterfaceinfo.UserInterfaceInfoQueryRequest;
 import com.point.springbootinit.model.dto.userinterfaceinfo.UserInterfaceInfoUpdateRequest;
+import com.point.springbootinit.service.InterfaceInfoService;
 import com.point.springbootinit.service.UserInterfaceInfoService;
 import com.point.springbootinit.service.UserService;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +43,9 @@ public class UserInterfaceInfoController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private InterfaceInfoService interfaceInfoService;
 
     // region 增删改查
 
@@ -191,5 +198,132 @@ public class UserInterfaceInfoController {
     }
 
     // endregion
+
+    /**
+     * 当前用户申请接口
+     *
+     * @param idRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/add/my")
+    public BaseResponse<UserInterfaceInfo> addLoginUserInterface(@RequestBody IdRequest idRequest,
+                                                                 HttpServletRequest request) {
+        // 判断参数
+        if (idRequest == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 获取当前用户
+        User loginUser = userService.getLoginUser(request);
+        if (loginUser == null) {
+            throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR);
+        }
+
+        // 获取申请的接口
+        InterfaceInfo interfaceInfo = interfaceInfoService.getById(idRequest.getId());
+        if (interfaceInfo == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+
+        UserInterfaceInfo userInterfaceInfo = null;
+        userInterfaceInfo = hasUserInterface(loginUser.getId(), idRequest.getId());
+
+        // 判断接口和用户是否被禁止
+        if (userInterfaceInfo != null && userInterfaceInfo.getStatus() == 1) {
+            throw new BusinessException(ErrorCode.FORBIDDEN_ERROR);
+        }
+        if (userInterfaceInfo == null) {
+            userInterfaceInfo = new UserInterfaceInfo();
+            userInterfaceInfo.setUserId(loginUser.getId());
+            userInterfaceInfo.setInterfaceInfoId(interfaceInfo.getId());
+            userInterfaceInfo.setTotalNum(100);
+            userInterfaceInfo.setLeftNum(100);
+            userInterfaceInfo.setStatus(0);
+            userInterfaceInfo.setCreateTime(new DateTime());
+            userInterfaceInfo.setUpdateTime(new DateTime());
+            userInterfaceInfo.setIsDelete(0);
+
+            boolean result = userInterfaceInfoService.save(userInterfaceInfo);
+            ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
+            return ResultUtils.success(userInterfaceInfo);
+        } else {
+            UpdateWrapper<UserInterfaceInfo> updateWrapper = new UpdateWrapper<>();
+            updateWrapper.eq("interfaceInfoId", idRequest.getId());
+            updateWrapper.eq("userId", loginUser.getId());
+
+            Integer upper = 100 - userInterfaceInfo.getLeftNum();
+
+            updateWrapper.setSql("leftNum = leftNum + " + upper + ", totalNum = totalNum + " + upper);
+
+            boolean result = userInterfaceInfoService.update(updateWrapper);
+            ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
+
+            return ResultUtils.success(hasUserInterface(loginUser.getId(), idRequest.getId()));
+        }
+    }
+
+    /**
+     * 当前用户获取接口
+     *
+     * @param idRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/get/my")
+    public BaseResponse<UserInterfaceInfo> getLoginUserInterface(@RequestBody IdRequest idRequest,
+                                                                 HttpServletRequest request) {
+        // 判断参数
+        if (idRequest == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 获取当前用户
+        User loginUser = userService.getLoginUser(request);
+        if (loginUser == null) {
+            throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR);
+        }
+
+        // 获取申请的接口
+        InterfaceInfo interfaceInfo = interfaceInfoService.getById(idRequest.getId());
+        if (interfaceInfo == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+
+        UserInterfaceInfo userInterfaceInfo = null;
+
+
+        userInterfaceInfo = hasUserInterface(loginUser.getId(), idRequest.getId());
+
+        // 判断接口和用户是否被禁止
+        if (userInterfaceInfo != null && userInterfaceInfo.getStatus() == 1) {
+            throw new BusinessException(ErrorCode.FORBIDDEN_ERROR);
+        }
+
+        if (userInterfaceInfo == null) {
+            userInterfaceInfo = new UserInterfaceInfo();
+            userInterfaceInfo.setId(0L);
+            userInterfaceInfo.setUserId(0L);
+            userInterfaceInfo.setInterfaceInfoId(0L);
+            userInterfaceInfo.setTotalNum(100);
+            userInterfaceInfo.setLeftNum(0);
+            userInterfaceInfo.setStatus(1);
+            userInterfaceInfo.setCreateTime(new DateTime());
+            userInterfaceInfo.setUpdateTime(new DateTime());
+            userInterfaceInfo.setIsDelete(0);
+        }
+
+        return ResultUtils.success(userInterfaceInfo);
+    }
+
+    private UserInterfaceInfo hasUserInterface(Long userId, Long interfaceInfoId) {
+        // 判断
+        if (interfaceInfoId <= 0 || userId <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        UpdateWrapper<UserInterfaceInfo> getOneWrapper = new UpdateWrapper<>();
+        getOneWrapper.eq("interfaceInfoId", interfaceInfoId);
+        getOneWrapper.eq("userId", userId);
+
+        return userInterfaceInfoService.getOne(getOneWrapper);
+    }
 
 }

@@ -2,15 +2,11 @@ package com.point.apisdk.client;
 
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
-import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 import com.point.apisdk.common.BaseResponse;
-import com.point.apisdk.exception.BusinessException;
 import com.point.apisdk.model.entity.PointBoringTalk;
 import com.point.apisdk.utils.SignUtils;
 
-
-import java.util.HashMap;
 
 import static com.point.apisdk.utils.CheckUtils.CheckResponse;
 
@@ -20,7 +16,7 @@ import static com.point.apisdk.utils.CheckUtils.CheckResponse;
  */
 public class PointApiClient {
 
-    private static final String PATH = "http://localhost:8123";
+    private static final String GATEWAY_PATH = "http://localhost:8090";
 
     private String accessKey;
 
@@ -35,7 +31,7 @@ public class PointApiClient {
         // 将用于请求的对象装换为json
         String json = JSONUtil.toJsonStr("");
 
-        HttpResponse httpResponse = HttpRequest.post(PATH + "/api/boringtalk/random")
+        HttpResponse httpResponse = HttpRequest.post(GATEWAY_PATH + "/api/boringtalk/random")
                 .addHeaders(SignUtils.GetHeaderMap(json, accessKey, secretKey))
                 .body(json)
                 .execute();

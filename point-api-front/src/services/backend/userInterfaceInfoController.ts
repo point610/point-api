@@ -17,6 +17,21 @@ export async function addUserInterfaceInfoUsingPost(
   });
 }
 
+/** addLoginUserInterface POST /api/userInterfaceInfo/add/my */
+export async function addLoginUserInterfaceUsingPost(
+  body: API.IdRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseUserInterfaceInfo_>('/api/userInterfaceInfo/add/my', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** deleteUserInterfaceInfo POST /api/userInterfaceInfo/delete */
 export async function deleteUserInterfaceInfoUsingPost(
   body: API.DeleteRequest,
@@ -43,6 +58,21 @@ export async function getUserInterfaceInfoByIdUsingGet(
     params: {
       ...params,
     },
+    ...(options || {}),
+  });
+}
+
+/** getLoginUserInterface POST /api/userInterfaceInfo/get/my */
+export async function getLoginUserInterfaceUsingPost(
+  body: API.IdRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseUserInterfaceInfo_>('/api/userInterfaceInfo/get/my', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
     ...(options || {}),
   });
 }

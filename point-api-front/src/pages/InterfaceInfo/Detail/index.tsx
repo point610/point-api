@@ -1,12 +1,18 @@
 import AuthorInfo from '@/pages/InterfaceInfo/Detail/components/AuthorInfo';
+import ErrorCode from '@/pages/InterfaceInfo/Detail/components/ErrorCode';
 import {
   getInterfaceInfoByIdUsingGet
 } from '@/services/backend/interfaceInfoController';
-import { useModel, useParams} from '@@/exports';
+import {useModel, useParams} from '@@/exports';
 import {PageContainer} from '@ant-design/pro-components';
-import {Badge, Card, Col, Image, message, Row, Space, Tabs, Tag, Typography} from 'antd';
+import {Badge, Card, Col, Image, message, Row, Space, Tabs, Tag, Progress, Typography, Button} from 'antd';
 import moment from 'moment';
 import React, {useEffect, useState} from 'react';
+import {
+  addLoginUserInterfaceUsingPost,
+  addUserInterfaceInfoUsingPost,
+  getLoginUserInterfaceUsingPost
+} from "@/services/backend/userInterfaceInfoController";
 
 /**
  * 生成器详情页
@@ -17,6 +23,7 @@ const GeneratorDetailPage: React.FC = () => {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<API.InterfaceInfoVO>({});
+  const [userInterfaceInfoDate, setUserInterfaceInfoDate] = useState<API.UserInterfaceInfo>({});
   const {initialState} = useModel('@@initialState');
   const {currentUser} = initialState ?? {};
   const my = currentUser?.id === data?.userId;
@@ -34,6 +41,12 @@ const GeneratorDetailPage: React.FC = () => {
         id,
       });
       setData(res.data || {});
+
+      const restemp = await getLoginUserInterfaceUsingPost({
+        id,
+      });
+      setUserInterfaceInfoDate(restemp.data || {});
+
     } catch (error: any) {
       message.error('获取数据失败，' + error.message);
     }
@@ -44,14 +57,29 @@ const GeneratorDetailPage: React.FC = () => {
     loadData();
   }, [id]);
 
+  /**
+   * 提交
+   * @param values
+   */
+  const requestLimit = async () => {
+    try {
+      const restemp = await addLoginUserInterfaceUsingPost({
+        id,
+      });
+      setUserInterfaceInfoDate(restemp.data || {});
+    } catch (error: any) {
+      message.error('获取数据失败，' + error.message);
+    }
+  };
+
 
   return (
     <PageContainer title={<></>} loading={loading}>
-      <Card>
+      <Card title="接口信息" bordered={false} headStyle={{background: "#eae5f1"}}>
         <Row justify="space-between" gutter={[32, 32]}>
           <Col flex="auto">
             <Space size="large" align="center">
-              <Typography.Title level={4}>{data.name}</Typography.Title>
+              <Typography.Title level={3}>{data.name}</Typography.Title>
             </Space>
             <Typography.Paragraph type="secondary">名称：{data.name}</Typography.Paragraph>
             <Typography.Paragraph type="secondary">描述：{data.description}</Typography.Paragraph>
@@ -70,7 +98,16 @@ const GeneratorDetailPage: React.FC = () => {
           </Col>
         </Row>
       </Card>
-      <div style={{marginBottom: 16}}/>
+      <p></p>
+      {/*接口剩余调用次数*/}
+      <Card title="接口剩余调用次数" bordered={false} headStyle={{background: "#eae5f1"}}
+            extra={<Button onClick={requestLimit}>申请调用次数</Button>}>
+        <Progress
+          percent={userInterfaceInfoDate.leftNum}
+          status="active"/>
+      </Card>
+      <p></p>
+      {/*其他信息*/}
       <Card>
         <Tabs
           size="large"
@@ -84,9 +121,9 @@ const GeneratorDetailPage: React.FC = () => {
               children: <AuthorInfo data={data}/>,
             },
             {
-              key: 'use',
-              label: '在线调试',
-              children: <AuthorInfo data={data}/>,
+              key: 'erroecode',
+              label: '错误码',
+              children: <ErrorCode/>,
             },
             {
               key: 'userInfo',

@@ -23,11 +23,8 @@ public class PointapiGatewayApplication {
 
 
     public static void main(String[] args) {
-
-        ConfigurableApplicationContext context = SpringApplication.run(PointapiGatewayApplication.class, args);
-        PointapiGatewayApplication application = context.getBean(PointapiGatewayApplication.class);
+        SpringApplication.run(PointapiGatewayApplication.class, args);
     }
-
 
 
 }

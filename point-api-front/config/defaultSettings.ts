@@ -15,7 +15,7 @@ const Settings: ProLayoutProps & {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: '前端万用模板',
+  title: 'point-api',
   pwa: true,
   logo:'https://tucdn.wpon.cn/2024/01/30/e5292df8ae1c0.png',
   iconfontUrl: '',

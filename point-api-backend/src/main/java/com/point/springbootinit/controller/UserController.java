@@ -1,5 +1,7 @@
 package com.point.springbootinit.controller;
 
+import cn.hutool.core.util.RandomUtil;
+import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.point.apicommon.model.entity.User;
@@ -22,6 +24,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.sun.javafx.font.FontResource.SALT;
 
 /**
  * 用户接口
@@ -274,8 +278,8 @@ public class UserController {
      * @return
      */
     @PostMapping("/update/my")
-    public BaseResponse<Boolean> updateMyUser(@RequestBody UserUpdateMyRequest userUpdateMyRequest,
-                                              HttpServletRequest request) {
+    public BaseResponse<User> updateMyUser(@RequestBody UserUpdateMyRequest userUpdateMyRequest,
+                                           HttpServletRequest request) {
         if (userUpdateMyRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -285,6 +289,37 @@ public class UserController {
         user.setId(loginUser.getId());
         boolean result = userService.updateById(user);
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
-        return ResultUtils.success(true);
+        return ResultUtils.success(user);
     }
+
+    /**
+     * 更新aksk
+     *
+     * @param request
+     * @return
+     */
+    @PostMapping("/update/my/aksk")
+    public BaseResponse<User> updateMyUserAKSK(HttpServletRequest request) {
+        User loginUser = userService.getLoginUser(request);
+        if (loginUser == null) {
+            throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR);
+        }
+
+        //分配 accessKey, secretKey
+        String userAccount = loginUser.getUserAccount();
+        String accessKey = DigestUtil.md5Hex(SALT + userAccount + RandomUtil.randomNumbers(5));
+        String secretKey = DigestUtil.md5Hex(SALT + userAccount + RandomUtil.randomNumbers(8));
+
+        // 赋值数据
+        User user = new User();
+        BeanUtils.copyProperties(loginUser, user);
+        user.setAccessKey(accessKey);
+        user.setSecretKey(secretKey);
+
+        // 更新数据
+        boolean result = userService.updateById(user);
+        ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
+        return ResultUtils.success(user);
+    }
+
 }
