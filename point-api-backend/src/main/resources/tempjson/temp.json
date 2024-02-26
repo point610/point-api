@@ -1,0 +1,14 @@
+[
+  {
+    "paramName": "type",
+    "type": "string",
+    "description": "十二星座对应英文小写，aries, taurus, gemini, cancer, leo, virgo, libra, scorpio, sagittarius, capricorn, aquarius, pisces",
+    "required": "是"
+  },
+  {
+    "paramName": "time",
+    "type": "string",
+    "description": "今日明日一周等运势,today, nextday, week, month, year, love",
+    "required": "是"
+  }
+]

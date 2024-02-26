@@ -40,7 +40,10 @@ public class InterfaceInfoUpdateRequest implements Serializable {
      * 请求参数
      */
     private String requestParams;
-
+    /**
+     * 响应参数
+     */
+    private String responseParams;
     /**
      * 请求头
      */

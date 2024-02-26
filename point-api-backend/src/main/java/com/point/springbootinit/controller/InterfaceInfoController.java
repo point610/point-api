@@ -62,7 +62,7 @@ public class InterfaceInfoController {
         interfaceInfo.setUserId(loginUser.getId());
         boolean result = interfaceInfoService.save(interfaceInfo);
         if (!result) {
-            throw new BusinessException(ErrorCode.OPERATION_ERROR);
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         long newInterfaceInfoId = interfaceInfo.getId();
         return ResultUtils.success(newInterfaceInfoId);

@@ -1,3 +1,4 @@
+import APITextInfo from '@/pages/InterfaceInfo/Detail/components/APIText';
 import AuthorInfo from '@/pages/InterfaceInfo/Detail/components/AuthorInfo';
 import ErrorCode from '@/pages/InterfaceInfo/Detail/components/ErrorCode';
 import {
@@ -10,7 +11,6 @@ import moment from 'moment';
 import React, {useEffect, useState} from 'react';
 import {
   addLoginUserInterfaceUsingPost,
-  addUserInterfaceInfoUsingPost,
   getLoginUserInterfaceUsingPost
 } from "@/services/backend/userInterfaceInfoController";
 
@@ -116,9 +116,9 @@ const GeneratorDetailPage: React.FC = () => {
           }}
           items={[
             {
-              key: 'apikey',
+              key: 'apitext',
               label: 'API文档',
-              children: <AuthorInfo data={data}/>,
+              children: <APITextInfo data={data}/>,
             },
             {
               key: 'erroecode',

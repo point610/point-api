@@ -88,6 +88,11 @@ const InterfaceInfoAdminPage: React.FC = () => {
       valueType: 'text',
     },
     {
+      title: '响应参数',
+      dataIndex: 'responseParams',
+      valueType: 'text',
+    },
+    {
       title: '请求头',
       dataIndex: 'requestHeader',
       valueType: 'text',

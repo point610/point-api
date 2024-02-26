@@ -40,6 +40,7 @@ create table if not exists `interface_info`
     `picture`        varchar(256)                       null comment '图片',
     `url`            varchar(512)                       not null comment '接口地址',
     `requestParams`  text                               not null comment '请求参数',
+    `responseParams` text                               not null comment '响应参数',
     `requestHeader`  text                               null comment '请求头',
     `responseHeader` text                               null comment '响应头',
     `status`         int      default 0                 not null comment '接口状态（0-关闭，1-开启）',

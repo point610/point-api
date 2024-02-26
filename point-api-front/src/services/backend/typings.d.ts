@@ -174,6 +174,7 @@ declare namespace API {
     requestHeader?: string;
     requestParams?: string;
     responseHeader?: string;
+    responseParams?: string;
     status?: number;
     updateTime?: string;
     url?: string;
@@ -188,6 +189,7 @@ declare namespace API {
     requestHeader?: string;
     requestParams?: string;
     responseHeader?: string;
+    responseParams?: string;
     url?: string;
   };
 
@@ -201,6 +203,7 @@ declare namespace API {
     requestHeader?: string;
     requestParams?: string;
     responseHeader?: string;
+    responseParams?: string;
     sortField?: string;
     sortOrder?: string;
     status?: number;
@@ -217,6 +220,7 @@ declare namespace API {
     requestHeader?: string;
     requestParams?: string;
     responseHeader?: string;
+    responseParams?: string;
     status?: number;
     url?: string;
   };
@@ -232,6 +236,7 @@ declare namespace API {
     requestHeader?: string;
     requestParams?: string;
     responseHeader?: string;
+    responseParams?: string;
     status?: number;
     totalNum?: number;
     updateTime?: string;
