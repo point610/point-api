@@ -69,7 +69,10 @@ public class InterfaceInfoQueryRequest extends PageRequest implements Serializab
      * 请求类型
      */
     private String method;
-
+    /**
+     * 方法名
+     */
+    private String methodName;
     /**
      * 创建人
      */

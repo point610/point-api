@@ -60,5 +60,8 @@ public class InterfaceInfoAddRequest implements Serializable {
      * 请求类型
      */
     private String method;
-
+    /**
+     * 方法名
+     */
+    private String methodName;
 }

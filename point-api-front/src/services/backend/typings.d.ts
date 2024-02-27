@@ -175,6 +175,7 @@ declare namespace API {
     id?: number;
     isDelete?: number;
     method?: string;
+    methodName?: string;
     name?: string;
     picture?: string;
     requestHeader?: string;
@@ -191,6 +192,7 @@ declare namespace API {
   type InterfaceInfoAddRequest = {
     description?: string;
     method?: string;
+    methodName?: string;
     name?: string;
     picture?: string;
     requestHeader?: string;
@@ -211,6 +213,7 @@ declare namespace API {
     description?: string;
     id?: number;
     method?: string;
+    methodName?: string;
     name?: string;
     pageSize?: number;
     requestHeader?: string;
@@ -229,6 +232,7 @@ declare namespace API {
     description?: string;
     id?: number;
     method?: string;
+    methodName?: string;
     name?: string;
     picture?: string;
     requestHeader?: string;
@@ -246,6 +250,7 @@ declare namespace API {
     id?: number;
     isDelete?: number;
     method?: string;
+    methodName?: string;
     name?: string;
     picture?: string;
     requestHeader?: string;

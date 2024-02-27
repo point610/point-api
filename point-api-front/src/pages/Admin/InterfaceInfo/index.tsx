@@ -123,13 +123,18 @@ const InterfaceInfoAdminPage: React.FC = () => {
       title: '请求类型',
       dataIndex: 'method',
       valueEnum: {
-        post: {
-          text: 'post',
+        POST: {
+          text: 'POST',
         },
-        get: {
-          text: 'get',
+        GET: {
+          text: 'GET',
         },
       },
+    },
+    {
+      title: '方法名',
+      valueType: 'text',
+      dataIndex: 'methodName',
     },
     {
       title: '创建人',

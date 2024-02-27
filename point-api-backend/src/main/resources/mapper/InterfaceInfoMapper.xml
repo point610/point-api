@@ -17,6 +17,7 @@
         <result property="responseExample" column="responseExample" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="INTEGER"/>
         <result property="method" column="method" jdbcType="VARCHAR"/>
+        <result property="methodName" column="methodName" jdbcType="VARCHAR"/>
         <result property="userId" column="userId" jdbcType="BIGINT"/>
         <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
@@ -26,7 +27,7 @@
     <sql id="Base_Column_List">
         id,name,description,picture,
         url,requestParams,responseParams,requestHeader,
-        responseHeader,responseExample,status,method,
+        responseHeader,responseExample,status,method,methodName,
         userId,createTime,updateTime,
         isDelete
     </sql>

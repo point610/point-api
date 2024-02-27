@@ -46,6 +46,7 @@ create table if not exists `interface_info`
     `responseExample` text                               null comment '返回示例',
     `status`          int      default 0                 not null comment '接口状态（0-关闭，1-开启）',
     `method`          varchar(256)                       not null comment '请求类型',
+    `methodName`      varchar(256)                       not null comment '请求类型',
     `userId`          bigint                             not null comment '创建人',
     `createTime`      datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     `updateTime`      datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
@@ -111,8 +112,50 @@ delete
 from user_interface_info
 where id > 8;
 
-INSERT INTO point_api.interface_info (id, name, description, picture, url, requestParams, responseParams, requestHeader, responseHeader, responseExample, status, method, userId, createTime, updateTime, isDelete)
-VALUES (1, '随机获取无聊的话', '随机获取无聊的话的接口', 'https://i.ibb.co/tc6NXvv/user-avatar-1761214571856367618-Pzq5-Oz-DR-Snipaste-2024-02-21-10-39-26-png317211128082173549.png', 'http://localhost:8090/api/boringtalk/random', null, '[
+INSERT INTO point_api.interface_info (id, name, description, picture, url, requestParams, responseParams, requestHeader,
+                                      responseHeader, responseExample, status, method, methodName, userId, createTime,
+                                      updateTime,
+                                      isDelete)
+VALUES (2, '测试接口', '测试接口',
+        'https://i.ibb.co/tc6NXvv/user-avatar-1761214571856367618-Pzq5-Oz-DR-Snipaste-2024-02-21-10-39-26-png317211128082173549.png',
+        'http://localhost:8123/api/test/user', '[
+  {
+    "paramName": "name",
+    "type": "string",
+    "description": "输入的名称",
+    "required": "是"
+  }
+]
+', '[
+  {
+    "paramName": "code",
+    "type": "int",
+    "description": "响应码"
+  },
+  {
+    "paramName": "data.name",
+    "type": "string",
+    "description": "用户名"
+  },
+  {
+    "paramName": "message",
+    "type": "string",
+    "description": "返回信息描述"
+  }
+]', null, null, '{
+  "code": 0,
+  "data": {
+    "name": "point"
+  },
+  "message": "用户名"
+}', 1, 'POST', 'getRandomBoringTalk', 1761214571856367618, '2024-02-27 15:25:36', '2024-02-27 15:35:36', 0);
+INSERT INTO point_api.interface_info (id, name, description, picture, url, requestParams, responseParams, requestHeader,
+                                      responseHeader, responseExample, status, method, methodName, userId, createTime,
+                                      updateTime,
+                                      isDelete)
+VALUES (1, '随机获取无聊的话', '随机获取无聊的话的接口',
+        'https://i.ibb.co/tc6NXvv/user-avatar-1761214571856367618-Pzq5-Oz-DR-Snipaste-2024-02-21-10-39-26-png317211128082173549.png',
+        'http://localhost:8123/api/boringtalk/random', '', '[
   {
     "paramName": "code",
     "type": "int",
@@ -121,14 +164,17 @@ VALUES (1, '随机获取无聊的话', '随机获取无聊的话的接口', 'htt
   {
     "paramName": "data.value",
     "type": "string",
-    "description": "随机土味情话"
+    "description": "用户名"
   },
   {
     "paramName": "message",
     "type": "string",
     "description": "返回信息描述"
   }
-]', null, null, null, 0, 'post', 1761214571856367618, '2024-02-27 09:19:25', '2024-02-27 09:28:55', 0);
-
-
-
+]', null, null, '{
+  "code": 0,
+  "data": {
+    "value": "随机无聊的话"
+  },
+  "message": "返回信息描述"
+}', 1, 'POST', 'getUserName', 1761214571856367618, '2024-02-27 09:19:25', '2024-02-27 15:28:40', 0);

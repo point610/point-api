@@ -108,7 +108,7 @@ const GeneratorDetailPage: React.FC = () => {
             <Typography.Paragraph type="secondary">接口地址：{data.url}</Typography.Paragraph>
             <Typography.Paragraph type="secondary">请求方式：<Tag color="blue">{data.method}</Tag></Typography.Paragraph>
             <Typography.Paragraph type="secondary">接口状态：
-              {data.status === 0 ? <Badge status="processing" text={"已上线"}/> :
+              {data.status === 1 ? <Badge status="processing" text={"已上线"}/> :
                 <Badge status="default" text={"已下线"}/>}</Typography.Paragraph>
             <Typography.Paragraph type="secondary">
               创建时间：{moment(data.createTime).format('YYYY-MM-DD HH:mm:ss')}

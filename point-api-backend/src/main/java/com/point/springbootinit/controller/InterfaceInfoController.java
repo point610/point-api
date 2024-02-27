@@ -1,5 +1,7 @@
 package com.point.springbootinit.controller;
 
+import java.lang.reflect.Method;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
@@ -258,9 +260,56 @@ public class InterfaceInfoController {
         String accessKey = loginUser.getAccessKey();
         String secretKey = loginUser.getSecretKey();
         PointApiClient pointApiClient = new PointApiClient(accessKey, secretKey);
-        String result = pointApiClient.getUserName(interfaceInfoInvokeRequest.getUserRequestParams());
+
+        // 调用哪个方法
+        Object result = reflectionInvoking(pointApiClient, oldInterfaceInfo.getMethodName(), interfaceInfoInvokeRequest.getUserRequestParams());
         System.out.println("result");
         System.out.println(result);
         return ResultUtils.success(result);
+    }
+
+    /**
+     * 使用反射调用sdk中的方法
+     *
+     * @param pointApiClient
+     * @param interfaceInfoMethodName
+     * @param userRequestParams
+     * @return
+     */
+    private Object reflectionInvoking(PointApiClient pointApiClient, String interfaceInfoMethodName, String userRequestParams) {
+        // 获取 PointApiClient 类的所有方法
+        Method[] methods = PointApiClient.class.getDeclaredMethods();
+        // 遍历所有方法
+        Object result = null;
+        for (Method method : methods) {
+            // 获取方法名
+            String methodName = method.getName();
+
+            System.out.println("methodName:" + methodName);
+            System.out.println("interfaceInfoMethodName:" + interfaceInfoMethodName);
+
+            // 如果方法名为指定的方法名
+            if (methodName.equals(interfaceInfoMethodName)) {
+                // 输出该方法的调用对象
+                System.out.println(method);
+
+                // 使用反射调用该方法
+                try {
+                    // 设置方法可访问性
+                    method.setAccessible(true);
+                    // 调用方法
+                    if (userRequestParams == null) {
+                        result = method.invoke(pointApiClient);
+                    }else {
+                        result = method.invoke(pointApiClient, userRequestParams);
+                    }
+                    System.out.println("Method result: " + result);
+                    break;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
     }
 }
