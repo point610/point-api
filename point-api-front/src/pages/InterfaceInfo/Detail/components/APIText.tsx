@@ -10,7 +10,7 @@ interface Props {
 const nullSource = [
   {
     paramName: '无',
-    type: '0',
+    type: '无',
     required: '无',
     description: '无',
   },
@@ -25,9 +25,9 @@ const APITextInfo: React.FC<Props> = (props) => {
 
   const user = data?.userVO;
   const requestParams = data?.requestParams;
-  const requestParamsSource = (requestParams === "" ? nullSource : JSON.parse(requestParams));
+  const requestParamsSource = ((requestParams === "" || requestParams === null) ? nullSource : JSON.parse(requestParams));
   const responseParams = data?.responseParams;
-  const responseParamsSource = JSON.parse(responseParams);
+  const responseParamsSource = ((responseParams === "" || responseParams === null) ? nullSource : JSON.parse(responseParams));
 
   const requestColumns = [
     {
@@ -75,15 +75,26 @@ const APITextInfo: React.FC<Props> = (props) => {
 
   return (
     <div>
+      {/*请求参数*/}
       <Paragraph>
         <blockquote>{"请求参数"}</blockquote>
       </Paragraph>
       <Table dataSource={requestParamsSource} pagination={false}
              columns={requestColumns}/>
+
+      {/*响应参数*/}
       <Paragraph>
         <blockquote>{"响应参数"}</blockquote>
       </Paragraph>
       <Table dataSource={responseParamsSource} pagination={false} columns={responseColumns}/>
+
+      {/*返回示例*/}
+      <Paragraph>
+        <blockquote>{"返回示例"}</blockquote>
+      </Paragraph>
+      <Card>
+        <pre>{data.responseExample}</pre>
+      </Card>
     </div>
   );
 };

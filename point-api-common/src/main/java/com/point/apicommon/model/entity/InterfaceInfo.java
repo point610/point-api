@@ -62,6 +62,11 @@ public class InterfaceInfo implements Serializable {
     private String responseHeader;
 
     /**
+     * 返回示例
+     */
+    private String responseExample;
+
+    /**
      * 接口状态（0-关闭，1-开启）
      */
     private Integer status;

@@ -7,12 +7,13 @@ use point_api;
 
 
 alter database point_api character set utf8;
+drop table point_boring_talk;
 
 -- 创建库
 create table if not exists point_boring_talk
 (
     id         bigint auto_increment comment 'id' primary key,
-    content    varchar(1024)                      null comment '用户头像',
+    value    varchar(1024)                      null comment '用户头像',
     userId     bigint                             not null comment '创建用户 id',
     createTime datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     updateTime datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
@@ -25,7 +26,7 @@ FROM point_boring_talk
 ORDER BY RAND()
 LIMIT 1;
 
-INSERT INTO point_boring_talk (content, userId)
+INSERT INTO point_boring_talk (value, userId)
 VALUES ('有时候我觉得我的生活就是一连串无聊的例行公事。', 1),
        ('这么做太无聊了，我真的需要点儿刺激。', 1),
        ('我无聊得要死，有没有什么好玩的东西做？', 1),

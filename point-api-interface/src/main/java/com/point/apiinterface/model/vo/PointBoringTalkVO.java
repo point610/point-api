@@ -15,7 +15,7 @@ public class PointBoringTalkVO implements Serializable {
     /**
      * 用户头像
      */
-    private String content;
+    private String value;
 
     private static final long serialVersionUID = 1L;
 }

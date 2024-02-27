@@ -13,6 +13,8 @@ import {
   addLoginUserInterfaceUsingPost,
   getLoginUserInterfaceUsingPost
 } from "@/services/backend/userInterfaceInfoController";
+import {DownloadOutlined} from "@ant-design/icons";
+import Invoke from "@/pages/InterfaceInfo/Detail/components/Invoke";
 
 /**
  * 生成器详情页
@@ -121,9 +123,14 @@ const GeneratorDetailPage: React.FC = () => {
               children: <APITextInfo data={data}/>,
             },
             {
+              key: 'invoke',
+              label: '在线调用',
+              children: <Invoke data={data}/>,
+            },
+            {
               key: 'erroecode',
               label: '错误码',
-              children: <ErrorCode/>,
+              children: <ErrorCode data={data}/>,
             },
             {
               key: 'userInfo',
@@ -132,6 +139,18 @@ const GeneratorDetailPage: React.FC = () => {
             },
           ]}
         />
+      </Card>
+      <p></p>
+      {/* 开发者 SDK */}
+      <Card title="开发者 SDK" bordered={false} headStyle={{background: "#eae5f1"}}>
+        <Row justify="space-between" gutter={[32, 32]}>
+          <Col flex="auto">
+            <Button size={"large"} target="_blank" href={"https://github.com/point610/point-api-sdk"}
+                    icon={<DownloadOutlined/>}>
+              Java SDK
+            </Button>
+          </Col>
+        </Row>
       </Card>
     </PageContainer>
   );

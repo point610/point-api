@@ -1,5 +1,6 @@
-import { Avatar, Card } from 'antd';
+import {Avatar, Button, Card, Col, Row} from 'antd';
 import React from 'react';
+import {DownloadOutlined} from "@ant-design/icons";
 
 interface Props {
   data: API.InterfaceInfoVO;
@@ -25,6 +26,8 @@ const AuthorInfo: React.FC<Props> = (props) => {
         title={user.userName}
         description={user.userProfile}
       />
+
+
     </div>
   );
 };

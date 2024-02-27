@@ -15,6 +15,6 @@ public class PointBoringTalk implements Serializable {
     /**
      * 用户头像
      */
-    private String content;
+    private String value;
 
 }

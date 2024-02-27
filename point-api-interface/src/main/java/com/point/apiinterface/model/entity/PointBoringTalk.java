@@ -23,7 +23,7 @@ public class PointBoringTalk implements Serializable {
     /**
      * 用户头像
      */
-    private String content;
+    private String value;
 
     /**
      * 创建用户 id

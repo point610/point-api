@@ -6,7 +6,7 @@
 
     <resultMap id="BaseResultMap" type="com.point.apiinterface.model.entity.PointBoringTalk">
         <id property="id" column="id" jdbcType="BIGINT"/>
-        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="value" column="value" jdbcType="VARCHAR"/>
         <result property="userId" column="userId" jdbcType="BIGINT"/>
         <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
@@ -15,7 +15,7 @@
 
     <sql id="Base_Column_List">
         id
-        ,content,userId,
+        ,value,userId,
         createTime,updateTime,isDelete
     </sql>
     <!-- 在 Mapper XML 文件中 -->

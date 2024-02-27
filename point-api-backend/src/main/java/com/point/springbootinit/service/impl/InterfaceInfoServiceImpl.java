@@ -49,8 +49,10 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
         String description = interfaceInfoQueryRequest.getDescription();
         String url = interfaceInfoQueryRequest.getUrl();
         String requestParams = interfaceInfoQueryRequest.getRequestParams();
+        String responseParams = interfaceInfoQueryRequest.getResponseParams();
         String requestHeader = interfaceInfoQueryRequest.getRequestHeader();
         String responseHeader = interfaceInfoQueryRequest.getResponseHeader();
+        String responseExample = interfaceInfoQueryRequest.getResponseExample();
         Integer status = interfaceInfoQueryRequest.getStatus();
         String method = interfaceInfoQueryRequest.getMethod();
         Long userId = interfaceInfoQueryRequest.getUserId();
@@ -65,8 +67,10 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
         queryWrapper.like(StringUtils.isNotBlank(description), "description", description);
         queryWrapper.like(StringUtils.isNotBlank(url), "userRole", url);
         queryWrapper.like(StringUtils.isNotBlank(requestParams), "requestParams", requestParams);
+        queryWrapper.like(StringUtils.isNotBlank(responseParams), "responseParams", responseParams);
         queryWrapper.like(StringUtils.isNotBlank(requestHeader), "requestHeader", requestHeader);
         queryWrapper.like(StringUtils.isNotBlank(responseHeader), "responseHeader", responseHeader);
+        queryWrapper.like(StringUtils.isNotBlank(responseExample), "responseExample", responseExample);
         queryWrapper.like(StringUtils.isNotBlank(method), "method", method);
 
         queryWrapper.orderBy(SqlUtils.validSortField(sortField), sortOrder.equals(CommonConstant.SORT_ORDER_ASC),

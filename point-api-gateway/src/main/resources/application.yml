@@ -7,21 +7,16 @@ spring:
       default-filters:
         - AddResponseHeader=source, point
       routes:
-        - id: api_route
-          uri: http://localhost:8123
-          predicates:
-            - Path=/api/**
+#        - id: api_route
+#          uri: http://localhost:8123
+#          predicates:
+#            - Path=/api/**
         - id: add_request_header_route
           uri: http://localhost:8123
           predicates:
             - Path=/api/**
           filters:
             - AddRequestHeader=point, 666
-            - AddRequestParameter=name, dog
-            - name: CircuitBreaker
-              args:
-                name: myCircuitBreaker
-                fallbackUri: forward:/fallback
 logging:
   level:
     org:

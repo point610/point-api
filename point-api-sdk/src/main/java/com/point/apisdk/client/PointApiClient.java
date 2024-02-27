@@ -39,6 +39,6 @@ public class PointApiClient {
 
         PointBoringTalk pointBoringTalk = JSONUtil.toBean(JSONUtil.toJsonStr(baseResponse.getData()), PointBoringTalk.class);
 
-        return pointBoringTalk.getContent();
+        return pointBoringTalk.getValue();
     }
 }

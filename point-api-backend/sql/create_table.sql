@@ -34,21 +34,22 @@ drop table interface_info;
 -- 接口信息
 create table if not exists `interface_info`
 (
-    `id`             bigint                             not null auto_increment comment '主键' primary key,
-    `name`           varchar(256)                       not null comment '名称',
-    `description`    varchar(256)                       null comment '描述',
-    `picture`        varchar(256)                       null comment '图片',
-    `url`            varchar(512)                       not null comment '接口地址',
-    `requestParams`  text                               not null comment '请求参数',
-    `responseParams` text                               not null comment '响应参数',
-    `requestHeader`  text                               null comment '请求头',
-    `responseHeader` text                               null comment '响应头',
-    `status`         int      default 0                 not null comment '接口状态（0-关闭，1-开启）',
-    `method`         varchar(256)                       not null comment '请求类型',
-    `userId`         bigint                             not null comment '创建人',
-    `createTime`     datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    `updateTime`     datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
-    `isDelete`       tinyint  default 0                 not null comment '是否删除(0-未删, 1-已删)'
+    `id`              bigint                             not null auto_increment comment '主键' primary key,
+    `name`            varchar(256)                       not null comment '名称',
+    `description`     varchar(256)                       null comment '描述',
+    `picture`         varchar(256)                       null comment '图片',
+    `url`             varchar(512)                       not null comment '接口地址',
+    `requestParams`   text                               null comment '请求参数',
+    `responseParams`  text                               null comment '响应参数',
+    `requestHeader`   text                               null comment '请求头',
+    `responseHeader`  text                               null comment '响应头',
+    `responseExample` text                               null comment '返回示例',
+    `status`          int      default 0                 not null comment '接口状态（0-关闭，1-开启）',
+    `method`          varchar(256)                       not null comment '请求类型',
+    `userId`          bigint                             not null comment '创建人',
+    `createTime`      datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    `updateTime`      datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    `isDelete`        tinyint  default 0                 not null comment '是否删除(0-未删, 1-已删)'
 ) comment '接口信息' collate = utf8mb4_unicode_ci;
 
 -- 用户调用接口关系表
@@ -109,3 +110,25 @@ create table if not exists post_favour
 delete
 from user_interface_info
 where id > 8;
+
+INSERT INTO point_api.interface_info (id, name, description, picture, url, requestParams, responseParams, requestHeader, responseHeader, responseExample, status, method, userId, createTime, updateTime, isDelete)
+VALUES (1, '随机获取无聊的话', '随机获取无聊的话的接口', 'https://i.ibb.co/tc6NXvv/user-avatar-1761214571856367618-Pzq5-Oz-DR-Snipaste-2024-02-21-10-39-26-png317211128082173549.png', 'http://localhost:8090/api/boringtalk/random', null, '[
+  {
+    "paramName": "code",
+    "type": "int",
+    "description": "响应码"
+  },
+  {
+    "paramName": "data.value",
+    "type": "string",
+    "description": "随机土味情话"
+  },
+  {
+    "paramName": "message",
+    "type": "string",
+    "description": "返回信息描述"
+  }
+]', null, null, null, 0, 'post', 1761214571856367618, '2024-02-27 09:19:25', '2024-02-27 09:28:55', 0);
+
+
+

@@ -3,16 +3,19 @@ package com.point.springbootinit.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
+import com.google.gson.Gson;
 import com.point.apicommon.model.entity.InterfaceInfo;
 import com.point.apicommon.model.entity.User;
 import com.point.apicommon.model.enums.InterfaceInfoStatusEnum;
 import com.point.apicommon.model.enums.PageEnum;
 import com.point.apicommon.model.vo.InterfaceInfoVO;
 import com.point.apicommon.model.vo.UserVO;
+import com.point.apisdk.client.PointApiClient;
 import com.point.springbootinit.annotation.AuthCheck;
 import com.point.springbootinit.common.*;
 import com.point.springbootinit.exception.BusinessException;
 import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoAddRequest;
+import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoInvokeRequest;
 import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
 import com.point.springbootinit.service.InterfaceInfoService;
@@ -226,5 +229,38 @@ public class InterfaceInfoController {
         return ResultUtils.success(result);
     }
 
+    /**
+     * 测试调用
+     *
+     * @param interfaceInfoInvokeRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/invoke")
+    public BaseResponse<Object> invokeInterfaceInfo(@RequestBody InterfaceInfoInvokeRequest interfaceInfoInvokeRequest,
+                                                    HttpServletRequest request) {
+        if (interfaceInfoInvokeRequest == null || interfaceInfoInvokeRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        long id = interfaceInfoInvokeRequest.getId();
+        String userRequestParams = interfaceInfoInvokeRequest.getUserRequestParams();
 
+        // 判断是否存在or能够使用
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
+        if (oldInterfaceInfo == null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        if (oldInterfaceInfo.getStatus() == InterfaceInfoStatusEnum.OFFLINE.getValue()) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "接口已关闭");
+        }
+
+        User loginUser = userService.getLoginUser(request);
+        String accessKey = loginUser.getAccessKey();
+        String secretKey = loginUser.getSecretKey();
+        PointApiClient pointApiClient = new PointApiClient(accessKey, secretKey);
+        String randomBoringTalk = pointApiClient.getRandomBoringTalk();
+        System.out.println("randomBoringTalk");
+        System.out.println(randomBoringTalk);
+        return ResultUtils.success(randomBoringTalk);
+    }
 }
