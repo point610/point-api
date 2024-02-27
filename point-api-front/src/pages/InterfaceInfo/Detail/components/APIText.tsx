@@ -92,7 +92,7 @@ const APITextInfo: React.FC<Props> = (props) => {
       <Paragraph>
         <blockquote>{"返回示例"}</blockquote>
       </Paragraph>
-      <Card>
+      <Card style={{background: "#f3f2fa"}}>
         <pre>{data.responseExample}</pre>
       </Card>
     </div>

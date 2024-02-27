@@ -258,9 +258,9 @@ public class InterfaceInfoController {
         String accessKey = loginUser.getAccessKey();
         String secretKey = loginUser.getSecretKey();
         PointApiClient pointApiClient = new PointApiClient(accessKey, secretKey);
-        String randomBoringTalk = pointApiClient.getRandomBoringTalk();
-        System.out.println("randomBoringTalk");
-        System.out.println(randomBoringTalk);
-        return ResultUtils.success(randomBoringTalk);
+        String result = pointApiClient.getUserName(interfaceInfoInvokeRequest.getUserRequestParams());
+        System.out.println("result");
+        System.out.println(result);
+        return ResultUtils.success(result);
     }
 }

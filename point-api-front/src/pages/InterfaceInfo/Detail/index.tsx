@@ -59,6 +59,25 @@ const GeneratorDetailPage: React.FC = () => {
     loadData();
   }, [id]);
 
+   /**
+   * 加载接口剩余调用次数
+   */
+  const loadUserInterfaceInfo = async () => {
+    try {
+      const restemp = await getLoginUserInterfaceUsingPost({
+        id,
+      });
+      setUserInterfaceInfoDate(restemp.data || {});
+    } catch (error: any) {
+      message.error('获取数据失败，' + error.message);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, [id]);
+
   /**
    * 提交
    * @param values
@@ -73,6 +92,7 @@ const GeneratorDetailPage: React.FC = () => {
       message.error('获取数据失败，' + error.message);
     }
   };
+
 
 
   return (
@@ -125,7 +145,7 @@ const GeneratorDetailPage: React.FC = () => {
             {
               key: 'invoke',
               label: '在线调用',
-              children: <Invoke data={data}/>,
+              children: <Invoke data={data} callback={loadUserInterfaceInfo}/>,
             },
             {
               key: 'erroecode',

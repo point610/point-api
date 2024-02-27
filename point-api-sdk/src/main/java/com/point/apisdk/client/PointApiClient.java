@@ -5,6 +5,7 @@ import cn.hutool.http.HttpResponse;
 import cn.hutool.json.JSONUtil;
 import com.point.apisdk.common.BaseResponse;
 import com.point.apisdk.model.entity.PointBoringTalk;
+import com.point.apisdk.model.entity.PointUser;
 import com.point.apisdk.utils.SignUtils;
 
 
@@ -40,5 +41,20 @@ public class PointApiClient {
         PointBoringTalk pointBoringTalk = JSONUtil.toBean(JSONUtil.toJsonStr(baseResponse.getData()), PointBoringTalk.class);
 
         return pointBoringTalk.getValue();
+    }
+
+    public String getUserName(String userRequestParams) {
+        // 将用于请求的对象装换为json
+        String json = userRequestParams;
+
+        HttpResponse httpResponse = HttpRequest.post(GATEWAY_PATH + "/api/test/user")
+                .addHeaders(SignUtils.GetHeaderMap(json, accessKey, secretKey))
+                .body(json)
+                .execute();
+        BaseResponse baseResponse = CheckResponse(httpResponse);
+
+        PointUser pointUser = JSONUtil.toBean(JSONUtil.toJsonStr(baseResponse.getData()), PointUser.class);
+
+        return pointUser.getName();
     }
 }

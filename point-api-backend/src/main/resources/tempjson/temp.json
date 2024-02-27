@@ -1,7 +1,32 @@
-{
-  "code": 0,
-  "data": {
-    "value": "随机无聊的话"
+//{
+//  "code": 0,
+//  "data": {
+//    "value": "随机无聊的话"
+//  },
+//  "message": "返回信息描述"
+//}
+//[
+//  {
+//    "paramName": "name",
+//    "type": "string",
+//    "description": "输入的名称",
+//    "required": "是"
+//  }
+//]
+[
+  {
+    "paramName": "code",
+    "type": "int",
+    "description": "响应码"
   },
-  "message": "返回信息描述"
-}
+  {
+    "paramName": "data.name",
+    "type": "string",
+    "description": "用户名"
+  },
+  {
+    "paramName": "message",
+    "type": "string",
+    "description": "返回信息描述"
+  }
+]
