@@ -3,6 +3,7 @@ package com.point.apigateway;
 import com.point.apicommon.model.entity.InterfaceInfo;
 import com.point.apicommon.model.entity.User;
 import com.point.apicommon.service.InnerInterfaceInfoService;
+import com.point.apicommon.service.InnerRedisService;
 import com.point.apicommon.service.InnerUserInterfaceInfoService;
 import com.point.apicommon.service.InnerUserService;
 import com.point.apisdk.utils.SignUtils;
@@ -45,6 +46,9 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
 
     @DubboReference
     private InnerUserInterfaceInfoService innerUserInterfaceInfoService;
+
+    @DubboReference
+    private InnerRedisService innerRedisService;
 
     // 白名单
     //private static final List<String> IP_WHITE_LIST = Arrays.asList("127.0.0.1");
@@ -104,6 +108,7 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
             return handleNoAuth(response);
         }
 
+
         // 检查 ak/sk
         // 实际情况中是从数据库中查出 secretKey
         String secretKey = invokeUser.getSecretKey();
@@ -121,6 +126,16 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
         }
         if (interfaceInfo == null) {
             return handleNoAuth(response);
+        }
+
+        // 将nonce加入redis中
+        try {
+            if (!innerRedisService.putRedisNone(invokeUser.getId(), interfaceInfo.getId(), nonce)) {
+                // 加入redis失败
+                return handleNoAuth(response);
+            }
+        } catch (Exception e) {
+            log.error("putRedisNone error", e);
         }
 
         // 5. 请求转发，调用模拟接口 + 响应日志

@@ -3,7 +3,7 @@ package com.point.springbootinit.service.impl.inner;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.point.apicommon.model.entity.User;
 import com.point.apicommon.service.InnerUserService;
-import com.point.apisdk.exception.ErrorCode;
+import com.point.apisdk.common.ErrorCode;
 import com.point.apisdk.exception.BusinessException;
 import com.point.springbootinit.mapper.UserMapper;
 import org.apache.commons.lang3.StringUtils;
