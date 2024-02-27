@@ -3,18 +3,16 @@ package com.point.apisdk.model.entity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
- * 无聊的话
- *
- * @TableName point_boring_talk
+ * 诗词
+ * @TableName point_poem
  */
 @Data
-public class PointBoringTalk implements Serializable {
-
+public class PointPoem implements Serializable {
     /**
      * 内容
      */
     private String value;
-
 }

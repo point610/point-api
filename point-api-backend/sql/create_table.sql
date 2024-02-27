@@ -135,7 +135,7 @@ VALUES (2, '测试接口', '测试接口',
   {
     "paramName": "data.name",
     "type": "string",
-    "description": "用户名"
+    "description": "内容"
   },
   {
     "paramName": "message",
@@ -148,7 +148,8 @@ VALUES (2, '测试接口', '测试接口',
     "name": "point"
   },
   "message": "用户名"
-}', 1, 'POST', 'getRandomBoringTalk', 1761214571856367618, '2024-02-27 15:25:36', '2024-02-27 15:35:36', 0);
+}', 1, 'POST', 'getUserName', 1761214571856367618, '2024-02-27 15:25:36', '2024-02-27 15:35:36', 0);
+
 INSERT INTO point_api.interface_info (id, name, description, picture, url, requestParams, responseParams, requestHeader,
                                       responseHeader, responseExample, status, method, methodName, userId, createTime,
                                       updateTime,
@@ -164,7 +165,7 @@ VALUES (1, '随机获取无聊的话', '随机获取无聊的话的接口',
   {
     "paramName": "data.value",
     "type": "string",
-    "description": "用户名"
+    "description": "内容"
   },
   {
     "paramName": "message",
@@ -177,4 +178,64 @@ VALUES (1, '随机获取无聊的话', '随机获取无聊的话的接口',
     "value": "随机无聊的话"
   },
   "message": "返回信息描述"
-}', 1, 'POST', 'getUserName', 1761214571856367618, '2024-02-27 09:19:25', '2024-02-27 15:28:40', 0);
+}', 1, 'POST', 'getRandomBoringTalk', 1761214571856367618, '2024-02-27 09:19:25', '2024-02-27 15:28:40', 0);
+
+INSERT INTO point_api.interface_info (id, name, description, picture, url, requestParams, responseParams, requestHeader,
+                                      responseHeader, responseExample, status, method, methodName, userId, createTime,
+                                      updateTime,
+                                      isDelete)
+VALUES (3, '随机获取诗句', '随机获取诗句的接口',
+        'https://i.ibb.co/tc6NXvv/user-avatar-1761214571856367618-Pzq5-Oz-DR-Snipaste-2024-02-21-10-39-26-png317211128082173549.png',
+        'http://localhost:8123/api/poem/random', '', '[
+  {
+    "paramName": "code",
+    "type": "int",
+    "description": "响应码"
+  },
+  {
+    "paramName": "data.value",
+    "type": "string",
+    "description": "内容"
+  },
+  {
+    "paramName": "message",
+    "type": "string",
+    "description": "返回信息描述"
+  }
+]', null, null, '{
+  "code": 0,
+  "data": {
+    "value": "随机诗句"
+  },
+  "message": "返回信息描述"
+}', 1, 'POST', 'getRandomPoem', 1761214571856367618, '2024-02-27 09:19:25', '2024-02-27 15:28:40', 0);
+
+INSERT INTO point_api.interface_info (id, name, description, picture, url, requestParams, responseParams, requestHeader,
+                                      responseHeader, responseExample, status, method, methodName, userId, createTime,
+                                      updateTime,
+                                      isDelete)
+VALUES (4, '随机获取心灵鸡汤', '随机获取心灵鸡汤的接口',
+        'https://i.ibb.co/tc6NXvv/user-avatar-1761214571856367618-Pzq5-Oz-DR-Snipaste-2024-02-21-10-39-26-png317211128082173549.png',
+        'http://localhost:8123/api/soulfulsanctuary/random', '', '[
+  {
+    "paramName": "code",
+    "type": "int",
+    "description": "响应码"
+  },
+  {
+    "paramName": "data.value",
+    "type": "string",
+    "description": "内容"
+  },
+  {
+    "paramName": "message",
+    "type": "string",
+    "description": "返回信息描述"
+  }
+]', null, null, '{
+  "code": 0,
+  "data": {
+    "value": "随机心灵鸡汤"
+  },
+  "message": "返回信息描述"
+}', 1, 'POST', 'getRandomSoulfulSanctuary', 1761214571856367618, '2024-02-27 09:19:25', '2024-02-27 15:28:40', 0);

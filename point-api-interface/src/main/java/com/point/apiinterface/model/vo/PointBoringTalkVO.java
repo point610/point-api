@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class PointBoringTalkVO implements Serializable {
 
     /**
-     * 用户头像
+     * 内容
      */
     private String value;
 

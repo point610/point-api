@@ -1,19 +1,20 @@
 package com.point.apiinterface.model.entity;
 
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.util.Date;
 
-import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 /**
- * 无聊的话
+ * 心灵鸡汤
  *
- * @TableName point_boring_talk
+ * @TableName point_soulful_sanctuary
  */
-@TableName(value = "point_boring_talk")
+@TableName(value = "point_soulful_sanctuary")
 @Data
-public class PointBoringTalk implements Serializable {
+public class PointSoulfulSanctuary implements Serializable {
     /**
      * id
      */

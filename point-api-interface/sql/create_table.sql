@@ -7,18 +7,20 @@ use point_api;
 
 
 alter database point_api character set utf8;
+
 drop table point_boring_talk;
 
 -- 创建库
 create table if not exists point_boring_talk
 (
     id         bigint auto_increment comment 'id' primary key,
-    value    varchar(1024)                      null comment '用户头像',
+    value      varchar(1024)                      null comment '内容',
     userId     bigint                             not null comment '创建用户 id',
     createTime datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     updateTime datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     isDelete   tinyint  default 0                 not null comment '是否删除'
 ) comment '无聊的话' collate = utf8mb4_unicode_ci;
+
 
 
 SELECT *
@@ -57,4 +59,92 @@ VALUES ('有时候我觉得我的生活就是一连串无聊的例行公事。',
        ('我真的很想逃离这种无聊的状态。', 1),
        ('我觉得我生活中缺少了乐趣。', 1),
        ('我渴望着有一些令人兴奋的事情发生。', 1);
+
+-- 创建库
+create table if not exists point_soulful_sanctuary
+(
+    id         bigint auto_increment comment 'id' primary key,
+    value      varchar(1024)                      null comment '内容',
+    userId     bigint                             not null comment '创建用户 id',
+    createTime datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    updateTime datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    isDelete   tinyint  default 0                 not null comment '是否删除'
+) comment '心灵鸡汤' collate = utf8mb4_unicode_ci;
+
+INSERT INTO point_soulful_sanctuary (value, userId)
+VALUES ('在沉寂中寻找力量，正如在黑暗中寻找光明。', 1),
+       ('相信自己，你已经走过了很远的路。', 1),
+       ('生活不会一直如此，但它会继续。', 1),
+       ('做你觉得最有意义的事情，永远不会太迟。', 1),
+       ('世界上最强大的力量就是持续不懈。', 1),
+       ('失败是成功之母。', 1),
+       ('即使是最小的行动也比最大的意图强。', 1),
+       ('永远不要放弃，因为生活从来没有放弃过你。', 1),
+       ('微笑，因为你值得拥有一切美好。', 1),
+       ('成功的人从不抱怨，抱怨的人从不成功。', 1),
+       ('每一个结束都是新的开始。', 1),
+       ('永远记住，你比自己想象的更勇敢，更坚强，更聪明。', 1),
+       ('用心生活，你会发现生活中的美好。', 1),
+       ('坚持不懈是成功的关键。', 1),
+       ('相信自己，你比自己想象的要强大。', 1),
+       ('生命中最美好的事情之一是，你永远可以重新开始。', 1),
+       ('保持微笑，因为生活会给你很多理由去哭泣。', 1),
+       ('你的生活是你创造的艺术品，用心创作。', 1),
+       ('永远不要放弃，因为奇迹发生在最不可能的时刻。', 1),
+       ('坚持就是胜利。', 1),
+       ('成功不是一蹴而就的，它需要时间、坚持和毅力。', 1),
+       ('忍耐和坚持总会得到报酬。', 1),
+       ('每一次挫折都是一次学习的机会。', 1),
+       ('心怀感激，生活将会更美好。', 1),
+       ('相信自己的内在力量，它比你所想象的要强大。', 1),
+       ('生命中最重要的事情不是发生了什么，而是我们如何应对它。', 1),
+       ('过去是过去，未来尚未到来，现在才是生活。', 1),
+       ('每一个愿望都是一个希望的种子。', 1),
+       ('相信自己，你已经走过了很远的路。', 1),
+       ('承认自己的错误，然后继续前进。', 1);
+-- 创建库
+create table if not exists point_poem
+(
+    id         bigint auto_increment comment 'id' primary key,
+    value      varchar(1024)                      null comment '内容',
+    userId     bigint                             not null comment '创建用户 id',
+    createTime datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    updateTime datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    isDelete   tinyint  default 0                 not null comment '是否删除'
+) comment '诗词' collate = utf8mb4_unicode_ci;
+
+INSERT INTO point_poem (value, userId)
+VALUES ('白日依山尽，黄河入海流。', 1),
+       ('欲穷千里目，更上一层楼。', 1),
+       ('明月几时有？把酒问青天。', 1),
+       ('不知天上宫阙，今夕是何年。', 1),
+       ('我欲乘风归去，又恐琼楼玉宇，高处不胜寒。', 1),
+       ('起舞弄清影，何似在人间。', 1),
+       ('转朱阁，低绮户，照无眠。', 1),
+       ('不应有恨，何事长向别时圆？', 1),
+       ('人有悲欢离合，月有阴晴圆缺，此事古难全。', 1),
+       ('但愿人长久，千里共婵娟。', 1),
+       ('春江潮水连海平，海上明月共潮生。', 1),
+       ('春眠不觉晓，处处闻啼鸟。', 1),
+       ('夜来风雨声，花落知多少。', 1),
+       ('朝辞白帝彩云间，千里江陵一日还。', 1),
+       ('青山横北郭，白水绕东城。', 1),
+       ('江山如此多娇，引无数英雄竞折腰。', 1),
+       ('沉舟侧畔千帆过，病树前头万木春。', 1),
+       ('大江东去，浪淘尽，千古风流人物。', 1),
+       ('风萧萧兮易水寒，壮士一去兮不复还。', 1),
+       ('静夜思床前明月光，疑是地上霜。举头望明月，低头思故乡。', 1),
+       ('人闲桂花落，夜静春山空。月出惊山鸟，时鸣春涧中。', 1),
+       ('白日依山尽，黄河入海流。', 1),
+       ('明月几时有？把酒问青天。', 1),
+       ('春江潮水连海平，海上明月共潮生。', 1),
+       ('春眠不觉晓，处处闻啼鸟。', 1),
+       ('夜来风雨声，花落知多少。', 1),
+       ('朝辞白帝彩云间，千里江陵一日还。', 1),
+       ('青山横北郭，白水绕东城。', 1),
+       ('江山如此多娇，引无数英雄竞折腰。', 1),
+       ('沉舟侧畔千帆过，病树前头万木春。', 1),
+       ('大江东去，浪淘尽，千古风流人物。', 1),
+       ('风萧萧兮易水寒，壮士一去兮不复还。', 1),
+       ('白日依山尽，黄河入海流。', 1);
 

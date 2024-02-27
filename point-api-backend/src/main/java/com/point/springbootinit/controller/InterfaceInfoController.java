@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.gson.Gson;
 import com.point.apicommon.model.entity.InterfaceInfo;
 import com.point.apicommon.model.entity.User;
+import com.point.apicommon.model.entity.UserInterfaceInfo;
 import com.point.apicommon.model.enums.InterfaceInfoStatusEnum;
 import com.point.apicommon.model.enums.PageEnum;
 import com.point.apicommon.model.vo.InterfaceInfoVO;
@@ -21,6 +22,7 @@ import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoInvokeReque
 import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
 import com.point.springbootinit.service.InterfaceInfoService;
+import com.point.springbootinit.service.UserInterfaceInfoService;
 import com.point.springbootinit.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -43,6 +45,8 @@ public class InterfaceInfoController {
 
     @Resource
     private UserService userService;
+    @Resource
+    private UserInterfaceInfoService userInterfaceInfoService;
 
 
     // region 增删改查
@@ -255,8 +259,17 @@ public class InterfaceInfoController {
         if (oldInterfaceInfo.getStatus() == InterfaceInfoStatusEnum.OFFLINE.getValue()) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "接口已关闭");
         }
-
         User loginUser = userService.getLoginUser(request);
+
+        // 判断用户和接口的关系是否从存在
+        QueryWrapper<UserInterfaceInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("interfaceInfoId", oldInterfaceInfo.getId());
+        queryWrapper.eq("userId", loginUser.getId());
+        UserInterfaceInfo userInterfaceInfo = userInterfaceInfoService.getOne(queryWrapper);
+        if (userInterfaceInfo == null || userInterfaceInfo.getLeftNum() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请申请接口调用次数");
+        }
+
         String accessKey = loginUser.getAccessKey();
         String secretKey = loginUser.getSecretKey();
         PointApiClient pointApiClient = new PointApiClient(accessKey, secretKey);
@@ -300,7 +313,7 @@ public class InterfaceInfoController {
                     // 调用方法
                     if (userRequestParams == null) {
                         result = method.invoke(pointApiClient);
-                    }else {
+                    } else {
                         result = method.invoke(pointApiClient, userRequestParams);
                     }
                     System.out.println("Method result: " + result);

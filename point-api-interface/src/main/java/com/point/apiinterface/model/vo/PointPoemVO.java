@@ -1,4 +1,4 @@
-package com.point.apisdk.model.entity;
+package com.point.apiinterface.model.vo;
 
 import lombok.Data;
 
@@ -10,11 +10,12 @@ import java.io.Serializable;
  * @TableName point_boring_talk
  */
 @Data
-public class PointBoringTalk implements Serializable {
+public class PointPoemVO implements Serializable {
 
     /**
      * 内容
      */
     private String value;
 
+    private static final long serialVersionUID = 1L;
 }
