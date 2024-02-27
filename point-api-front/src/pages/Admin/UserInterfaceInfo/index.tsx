@@ -108,6 +108,7 @@ const UserInterfaceInfoAdminPage: React.FC = () => {
     },
     {
       title: '操作',
+      fixed: 'right', width: 100,
       dataIndex: 'option',
       valueType: 'option',
       render: (_, record) => (
@@ -130,6 +131,7 @@ const UserInterfaceInfoAdminPage: React.FC = () => {
   return (
     <PageContainer>
       <ProTable<API.UserInterfaceInfo>
+        scroll={{x: 'max-content'}}
         headerTitle={'查询表格'}
         actionRef={actionRef}
         rowKey="key"
