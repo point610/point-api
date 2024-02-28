@@ -9,6 +9,7 @@ import com.point.springbootinit.exception.ThrowUtils;
 import com.point.springbootinit.manager.CacheManager;
 import io.swagger.models.auth.In;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -35,6 +36,7 @@ public class InnerRedisServiceImpl implements InnerRedisService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean putRedisNone(long interfaceInfoId, long userId, String nonce) {
         // 从缓存读取
         String cacheKey = getRedisCacheKey(interfaceInfoId, userId, nonce);
