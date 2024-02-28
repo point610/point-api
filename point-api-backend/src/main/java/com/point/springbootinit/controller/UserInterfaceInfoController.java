@@ -253,7 +253,7 @@ public class UserInterfaceInfoController {
 
             Integer upper = 100 - userInterfaceInfo.getLeftNum();
 
-            updateWrapper.setSql("leftNum = leftNum + " + upper + ", totalNum = totalNum + " + upper);
+            updateWrapper.setSql("leftNum = leftNum + " + upper );
 
             boolean result = userInterfaceInfoService.update(updateWrapper);
             ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);

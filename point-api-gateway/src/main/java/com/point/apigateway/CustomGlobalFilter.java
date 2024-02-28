@@ -108,7 +108,6 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
             return handleNoAuth(response);
         }
 
-
         // 检查 ak/sk
         // 实际情况中是从数据库中查出 secretKey
         String secretKey = invokeUser.getSecretKey();

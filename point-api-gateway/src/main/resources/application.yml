@@ -4,6 +4,9 @@ server:
 spring:
   cloud:
     gateway:
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 5000
       default-filters:
         - AddResponseHeader=source, point
       routes:
@@ -16,6 +19,7 @@ spring:
           predicates:
             - Path=/api/**
           filters:
+            - RequestHeaderSize=1000B
             - AddRequestHeader=point, 666
 logging:
   level:
