@@ -57,6 +57,7 @@ const GeneratorDetailPage: React.FC = () => {
       if (res.data) {
         setData(res.data || {});
         message.success('更新成功');
+        window.location.reload();
       }
     } catch (error: any) {
       message.error('更新失败，' + error.message);
