@@ -4,6 +4,8 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.Digester;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +38,11 @@ public class SignUtils {
         Map<String, String> hashMap = new HashMap<>();
         hashMap.put("accessKey", accessKey);
         hashMap.put("nonce", RandomUtil.randomNumbers(4));
-        hashMap.put("body", body);
+        try {
+            hashMap.put("body",  URLEncoder.encode(body,"utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
         hashMap.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
         hashMap.put("sign", GenSign(body, secretKey));
         return hashMap;

@@ -22,7 +22,15 @@
         createTime,updateTime,isDelete
     </sql>
     <select id="listTopInvokeInterfaceInfo" resultType="com.point.apicommon.model.entity.UserInterfaceInfo">
-        select interfaceInfoId, sum(totalNum) as totalNum from user_interface_info group by interfaceInfoId
-        order by totalNum desc limit #{limit};
+        select interfaceInfoId, sum(totalNum) as totalNum
+        from user_interface_info
+        group by interfaceInfoId
+        order by totalNum desc
+        limit #{limit};
+    </select>
+    <select id="getTotalInvokeByInterfaceInfoId" resultType="java.lang.Integer">
+        select sum(totalNum)
+        from user_interface_info
+        where interfaceInfoId= #{interfaceInfoId};
     </select>
 </mapper>

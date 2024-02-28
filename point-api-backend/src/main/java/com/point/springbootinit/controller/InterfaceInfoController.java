@@ -17,6 +17,7 @@ import com.point.apisdk.client.PointApiClient;
 import com.point.springbootinit.annotation.AuthCheck;
 import com.point.springbootinit.common.*;
 import com.point.springbootinit.exception.BusinessException;
+import com.point.springbootinit.mapper.UserInterfaceInfoMapper;
 import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoAddRequest;
 import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoInvokeRequest;
 import com.point.springbootinit.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,6 +51,8 @@ public class InterfaceInfoController {
     @Resource
     private UserInterfaceInfoService userInterfaceInfoService;
 
+    @Resource
+    private UserInterfaceInfoMapper userInterfaceInfoMapper;
 
     // region 增删改查
 
@@ -190,7 +194,7 @@ public class InterfaceInfoController {
      * @return
      */
     @PostMapping("/list/page")
-    public BaseResponse<Page<InterfaceInfo>> listInterfaceInfoByPage(@RequestBody InterfaceInfoQueryRequest interfaceInfoQueryRequest, HttpServletRequest request) {
+    public BaseResponse<Page<InterfaceInfoVO>> listInterfaceInfoVOByPage(@RequestBody InterfaceInfoQueryRequest interfaceInfoQueryRequest, HttpServletRequest request) {
         if (interfaceInfoQueryRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -202,7 +206,21 @@ public class InterfaceInfoController {
         }
         Page<InterfaceInfo> interfaceInfoPage = interfaceInfoService.page(new Page<>(current, size),
                 interfaceInfoService.getQueryWrapper(interfaceInfoQueryRequest));
-        return ResultUtils.success(interfaceInfoPage);
+
+        // 将interfaceInfo转化为vo对象，获取total的数值
+        List<InterfaceInfoVO> interfaceInfoVOList = new ArrayList<>();
+        for (InterfaceInfo interfaceInfo : interfaceInfoPage.getRecords()) {
+            InterfaceInfoVO interfaceInfoVO = new InterfaceInfoVO();
+            BeanUtils.copyProperties(interfaceInfo, interfaceInfoVO);
+            // 统计调用次数
+            Integer totalInvokeTimes = userInterfaceInfoMapper.getTotalInvokeByInterfaceInfoId(interfaceInfo.getId());
+            interfaceInfoVO.setTotalNum(totalInvokeTimes);
+            interfaceInfoVOList.add(interfaceInfoVO);
+        }
+
+        Page<InterfaceInfoVO> interfaceInfoVOPage = new Page<>();
+        interfaceInfoVOPage.setRecords(interfaceInfoVOList);
+        return ResultUtils.success(interfaceInfoVOPage);
     }
 
     // endregion

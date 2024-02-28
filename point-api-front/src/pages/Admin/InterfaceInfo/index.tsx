@@ -2,7 +2,7 @@ import CreateModal from '@/pages/Admin/InterfaceInfo/components/CreateModal';
 import UpdateModal from '@/pages/Admin/InterfaceInfo/components/UpdateModal';
 import {
   deleteInterfaceInfoUsingPost,
-  listInterfaceInfoByPageUsingPost
+  listInterfaceInfoVoByPageUsingPost
 } from '@/services/backend/interfaceInfoController';
 import {PlusOutlined} from '@ant-design/icons';
 import type {ActionType, ProColumns} from '@ant-design/pro-components';
@@ -205,7 +205,7 @@ const InterfaceInfoAdminPage: React.FC = () => {
           const sortField = Object.keys(sort)?.[0];
           const sortOrder = sort?.[sortField] ?? undefined;
 
-          const {data, code} = await listInterfaceInfoByPageUsingPost({
+          const {data, code} = await listInterfaceInfoVoByPageUsingPost({
             ...params,
             sortField,
             sortOrder,

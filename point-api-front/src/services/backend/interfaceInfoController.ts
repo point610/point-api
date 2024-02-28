@@ -77,12 +77,12 @@ export async function listInterfaceInfoUsingPost(
   });
 }
 
-/** listInterfaceInfoByPage POST /api/interfaceInfo/list/page */
-export async function listInterfaceInfoByPageUsingPost(
+/** listInterfaceInfoVOByPage POST /api/interfaceInfo/list/page */
+export async function listInterfaceInfoVoByPageUsingPost(
   body: API.InterfaceInfoQueryRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponsePageInterfaceInfo_>('/api/interfaceInfo/list/page', {
+  return request<API.BaseResponsePageInterfaceInfoVO_>('/api/interfaceInfo/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

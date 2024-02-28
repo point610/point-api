@@ -239,3 +239,7 @@ VALUES (4, '随机获取心灵鸡汤', '随机获取心灵鸡汤的接口',
   },
   "message": "返回信息描述"
 }', 1, 'POST', 'getRandomSoulfulSanctuary', 1761214571856367618, '2024-02-27 09:19:25', '2024-02-27 15:28:40', 0);
+
+select sum(totalNum)
+from user_interface_info
+where interfaceInfoId= 1;

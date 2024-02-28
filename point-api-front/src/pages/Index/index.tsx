@@ -1,6 +1,6 @@
-import {listInterfaceInfoByPageUsingPost} from '@/services/backend/interfaceInfoController';
-import {PageContainer,  ProFormText, QueryFilter} from '@ant-design/pro-components';
-import {Card, Flex, Image, Input, List, message, Tabs, Typography} from 'antd';
+import {listInterfaceInfoVoByPageUsingPost} from '@/services/backend/interfaceInfoController';
+import {PageContainer, ProFormText, QueryFilter} from '@ant-design/pro-components';
+import {Badge, Card, Flex, Image, Input, List, message, Tabs, Typography} from 'antd';
 import moment from 'moment';
 import React, {useEffect, useState} from 'react';
 import {Link} from "umi";
@@ -21,7 +21,7 @@ const DEFAULT_PAGE_PARAMS: PageRequest = {
  */
 const IndexPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [dataList, setDataList] = useState<API.InterfaceInfo[]>([]);
+  const [dataList, setDataList] = useState<API.InterfaceInfoVO[]>([]);
   const [total, setTotal] = useState<number>(0);
   // 搜索条件
   const [searchParams, setSearchParams] = useState<API.InterfaceInfoQueryRequest>({
@@ -34,7 +34,7 @@ const IndexPage: React.FC = () => {
   const doSearch = async () => {
     setLoading(true);
     try {
-      const res = await listInterfaceInfoByPageUsingPost(searchParams);
+      const res = await listInterfaceInfoVoByPageUsingPost(searchParams);
       setDataList(res.data?.records ?? []);
       setTotal(Number(res.data?.total) ?? 0);
     } catch (error: any) {
@@ -111,7 +111,7 @@ const IndexPage: React.FC = () => {
 
       <div style={{marginBottom: 24}}/>
 
-      <List<API.InterfaceInfo>
+      <List<API.InterfaceInfoVO>
         rowKey="id"
         loading={loading}
         grid={{
@@ -139,21 +139,23 @@ const IndexPage: React.FC = () => {
         renderItem={(data) => (
           <List.Item>
             <Link to={`/interfaceinfo/detail/${data.id}`}>
-              <Card hoverable cover={<Image alt={data.name} src={data.picture}/>}>
-                <Card.Meta
-                  title={<a>{data.name}</a>}
-                  description={
-                    <Typography.Paragraph ellipsis={{rows: 2}} style={{height: 44}}>
-                      {data.description}
-                    </Typography.Paragraph>
-                  }
-                />
-                <Flex justify="space-between" align="center">
-                  <Typography.Text type="secondary" style={{fontSize: 12}}>
-                    {moment(data.createTime).fromNow()}
-                  </Typography.Text>
-                </Flex>
-              </Card>
+              <Badge count={data.totalNum} overflowCount={999999} offset={[-15, 10]}>
+                <Card hoverable cover={<Image alt={data.name} src={data.picture}/>}>
+                  <Card.Meta
+                    title={<a>{data.name}</a>}
+                    description={
+                      <Typography.Paragraph ellipsis={{rows: 2}} style={{height: 44}}>
+                        {data.description}
+                      </Typography.Paragraph>
+                    }
+                  />
+                  <Flex justify="space-between" align="center">
+                    <Typography.Text type="secondary" style={{fontSize: 12}}>
+                      {moment(data.createTime).fromNow()}
+                    </Typography.Text>
+                  </Flex>
+                </Card>
+              </Badge>
             </Link>
           </List.Item>
         )}

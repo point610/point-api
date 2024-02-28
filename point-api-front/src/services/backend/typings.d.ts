@@ -59,9 +59,9 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponsePageInterfaceInfo_ = {
+  type BaseResponsePageInterfaceInfoVO_ = {
     code?: number;
-    data?: PageInterfaceInfo_;
+    data?: PageInterfaceInfoVO_;
     message?: string;
   };
 
@@ -316,14 +316,14 @@ declare namespace API {
     column?: string;
   };
 
-  type PageInterfaceInfo_ = {
+  type PageInterfaceInfoVO_ = {
     countId?: string;
     current?: number;
     maxLimit?: number;
     optimizeCountSql?: boolean;
     orders?: OrderItem[];
     pages?: number;
-    records?: InterfaceInfo[];
+    records?: InterfaceInfoVO[];
     searchCount?: boolean;
     size?: number;
     total?: number;
