@@ -22,12 +22,6 @@ create table if not exists point_boring_talk
 ) comment '无聊的话' collate = utf8mb4_unicode_ci;
 
 
-
-SELECT *
-FROM point_boring_talk
-ORDER BY RAND()
-LIMIT 1;
-
 INSERT INTO point_boring_talk (value, userId)
 VALUES ('有时候我觉得我的生活就是一连串无聊的例行公事。', 1),
        ('这么做太无聊了，我真的需要点儿刺激。', 1),

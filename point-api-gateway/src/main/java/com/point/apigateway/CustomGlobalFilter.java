@@ -55,7 +55,7 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
     // 白名单
     //private static final List<String> IP_WHITE_LIST = Arrays.asList("127.0.0.1");
 
-    private static final String INTERFACE_HOST = "http://localhost:8123";
+    private static final String INTERFACE_HOST = "http://124.71.42.27:8123";
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {

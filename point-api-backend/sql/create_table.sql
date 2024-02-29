@@ -108,9 +108,6 @@ create table if not exists post_favour
 ) comment '帖子收藏' collate = utf8mb4_unicode_ci;
 
 
-delete
-from user_interface_info
-where id > 8;
 
 INSERT INTO point_api.interface_info (id, name, description, picture, url, requestParams, responseParams, requestHeader,
                                       responseHeader, responseExample, status, method, methodName, userId, createTime,
@@ -240,6 +237,5 @@ VALUES (4, '随机获取心灵鸡汤', '随机获取心灵鸡汤的接口',
   "message": "返回信息描述"
 }', 1, 'POST', 'getRandomSoulfulSanctuary', 1761214571856367618, '2024-02-27 09:19:25', '2024-02-27 15:28:40', 0);
 
-select sum(totalNum)
-from user_interface_info
-where interfaceInfoId= 1;
+
+INSERT INTO user (id, userName, userAccount, userAvatar, gender, userRole, userPassword, userProfile, accessKey, secretKey, unionId, mpOpenId, createTime, updateTime, isDelete) VALUES (1761214571856367618, '12312312322222', '123123123', 'https://i.ibb.co/qst3G7F/user-avatar-1761214571856367618-CQb-DUn9-D-OIP-1-jpg3174580288137958110.jpg', null, 'admin', 'a7881917dbbb93ad558a059905211518', '这是简介这是简介这是简介这是简介这是简介这是简介这是简介', 'b432caafaeafc9331ca6f63753293777', '007451fd908f07384a32b7e4edc56fde', null, null, '2024-02-24 10:20:50', '2024-02-28 20:48:29', 0);

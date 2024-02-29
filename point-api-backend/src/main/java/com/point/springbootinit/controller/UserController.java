@@ -178,11 +178,17 @@ public class UserController {
      * @return
      */
     @GetMapping("/get")
-    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     public BaseResponse<User> getUserById(long id, HttpServletRequest request) {
         if (id <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
+
+        // 检查用户角色
+        User loginUser = userService.getLoginUser(request);
+        if (loginUser == null || (loginUser.getId() != id && !loginUser.getUserRole().equals(UserConstant.ADMIN_ROLE))) {
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
+        }
+
         User user = userService.getById(id);
         ThrowUtils.throwIf(user == null, ErrorCode.NOT_FOUND_ERROR);
         return ResultUtils.success(user);

@@ -23,7 +23,8 @@ import static com.point.apisdk.utils.CheckUtils.CheckResponse;
  */
 public class PointApiClient {
 
-    private static final String GATEWAY_PATH = "http://localhost:8090";
+    //private static final String GATEWAY_PATH = "http://localhost:8090";
+    private static final String GATEWAY_PATH = "http://124.71.42.27:8090";
 
     private String accessKey;
 

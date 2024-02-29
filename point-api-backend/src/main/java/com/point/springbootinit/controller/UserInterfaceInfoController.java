@@ -236,7 +236,7 @@ public class UserInterfaceInfoController {
             userInterfaceInfo = new UserInterfaceInfo();
             userInterfaceInfo.setUserId(loginUser.getId());
             userInterfaceInfo.setInterfaceInfoId(interfaceInfo.getId());
-            userInterfaceInfo.setTotalNum(100);
+            userInterfaceInfo.setTotalNum(0);
             userInterfaceInfo.setLeftNum(100);
             userInterfaceInfo.setStatus(0);
             userInterfaceInfo.setCreateTime(new DateTime());
@@ -303,7 +303,7 @@ public class UserInterfaceInfoController {
             userInterfaceInfo.setId(0L);
             userInterfaceInfo.setUserId(0L);
             userInterfaceInfo.setInterfaceInfoId(0L);
-            userInterfaceInfo.setTotalNum(100);
+            userInterfaceInfo.setTotalNum(0);
             userInterfaceInfo.setLeftNum(0);
             userInterfaceInfo.setStatus(1);
             userInterfaceInfo.setCreateTime(new DateTime());
