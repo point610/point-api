@@ -27,7 +27,7 @@
 
 - **[POINT-API 前端，web模块，网关模块，接口模块](https://github.com/point610/point-api)**
 - **[POINT-API-SDK️](https://github.com/point610/point-api-sdk)**
-- **[POINT-API 在线平台]()**
+- **[POINT-API 在线平台](http://124.71.42.27/user/login)**
 
 ## 目录结构 📑
 
