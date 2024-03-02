@@ -12,8 +12,6 @@ import com.point.apisdk.model.entity.PointUser;
 import com.point.apisdk.utils.SignUtils;
 
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 
 import static com.point.apisdk.utils.CheckUtils.CheckResponse;
 
